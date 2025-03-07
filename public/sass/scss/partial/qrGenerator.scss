@@ -1,0 +1,69 @@
+@use '../variables' as *;
+
+.qr-generator-container {
+		padding: 1rem;
+		max-width: 500px;
+		margin: 0 auto;
+
+	.input-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.qr-input {
+			flex: 1;
+			width: 100%;
+			padding: 0.5rem;
+			border: $border-color;
+			border-radius: $border-radius;
+		}
+
+		.qr-format {
+				padding: 8px;
+				border: $border-color;
+				border-radius: $border-radius;
+		}
+
+		.generate-button {
+			padding: 0.5rem 1rem;
+				background-color: $primary-color;
+				color: white;
+				border: none;
+				border-radius: $border-radius;
+				cursor: pointer;
+
+				&:hover {
+					background-color: $accent-color;
+			}
+		}
+	}
+
+	.qr-output {
+		display: flex;
+  	flex-direction: column;
+  	align-items: center;
+		text-align: center;
+
+		img, svg {
+			padding: 1rem;
+			border: $border-color;
+			border-radius: 4px;
+			max-width: 200px;
+			margin-bottom: 10px;
+		}
+
+		.download-button {
+			display: inline-block;
+			padding: 8px 16px;
+			margin: 5px;
+			background-color: #28a745;
+			color: white;
+			text-decoration: none;
+			border-radius: $border-radius;
+
+			&:hover {
+				background-color: #218838;
+			}
+		}
+	}
+}

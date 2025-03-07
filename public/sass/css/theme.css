@@ -1,0 +1,65 @@
+:root {
+  --primary-color: #2A5D43;
+  --secondary-color: #E8F6F0;
+  --third-color: #449f70;
+  --text-color: #3C4A3E;
+  --accent-color: #4cd68f;
+  --border-color: #2f905e;
+  --select-bg: #ffffff;
+  --background-color: #f5f5f5;
+  --secondary-background-color: #f5f5f5;
+  --red-color: #ff0000;
+  --red-dark-color: #cc0000;
+  --icon-size: 1.2rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --shadow-dropdown: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border: 1px solid var(--border-color);
+}
+
+.modal .modal-content div.theme-picker-container {
+  padding: 1rem;
+}
+.modal .modal-content div.theme-picker-container .predefined-palettes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.modal .modal-content div.theme-picker-container .predefined-palettes .palette-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.modal .modal-content div.theme-picker-container .predefined-palettes .palette-button:hover {
+  transform: scale(1.1);
+}
+.modal .modal-content div.theme-picker-container .custom-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal .modal-content div.theme-picker-container .custom-picker input[type=color] {
+  width: 100px;
+  height: 40px;
+  padding: 0 5px;
+}
+
+.theme-button {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.theme-button:hover {
+  color: var(--accent-color);
+}
+
+/*# sourceMappingURL=theme.css.map */

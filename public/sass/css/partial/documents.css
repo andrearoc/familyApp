@@ -1,0 +1,201 @@
+:root {
+  --primary-color: #2A5D43;
+  --secondary-color: #E8F6F0;
+  --third-color: #449f70;
+  --text-color: #3C4A3E;
+  --accent-color: #4cd68f;
+  --border-color: #2f905e;
+  --select-bg: #ffffff;
+  --background-color: #f5f5f5;
+  --secondary-background-color: #f5f5f5;
+  --red-color: #ff0000;
+  --red-dark-color: #cc0000;
+  --icon-size: 1.2rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --shadow-dropdown: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border: 1px solid var(--border-color);
+}
+
+.documents-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.documents-container .doc-form-container {
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.documents-container .doc-form-container h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.doc-form {
+  display: grid;
+  gap: 15px;
+}
+.doc-form input, .doc-form select {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+.doc-form input:focus, .doc-form select:focus {
+  outline: 2px solid var(--accent-color);
+  border-color: transparent;
+}
+.doc-form button {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.doc-form button:hover {
+  background: var(--accent-color);
+}
+
+.identity-card-form {
+  grid-template-columns: repeat(2, 1fr);
+}
+.identity-card-form .license-categories {
+  grid-column: 1/-1;
+}
+.identity-card-form button {
+  grid-column: 1/-1;
+}
+
+.health-card-form {
+  grid-template-columns: 1fr;
+}
+
+.drivers-license-form, .identity-card-form, .health-card-form {
+  grid-template-columns: repeat(2, 1fr);
+}
+.drivers-license-form h4, .identity-card-form h4, .health-card-form h4 {
+  margin: 0;
+}
+.drivers-license-form .license-categories .checkbox-group, .identity-card-form .license-categories .checkbox-group, .health-card-form .license-categories .checkbox-group {
+  display: flex;
+}
+.drivers-license-form .license-categories .checkbox-group label, .identity-card-form .license-categories .checkbox-group label, .health-card-form .license-categories .checkbox-group label {
+  color: var(--text-color);
+}
+
+.documents-list {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.document-card {
+  position: relative;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s;
+}
+.document-card.identity_card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  color: var(--secondary-color);
+}
+.document-card.health_card {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+  color: var(--primary-color);
+}
+.document-card.drivers_license {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  color: var(--text-color);
+}
+.document-card:hover {
+  transform: translateY(-5px);
+}
+.document-card .delete-document-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.document-card .delete-document-btn:hover {
+  background: rgb(255, 0, 0);
+}
+
+.doc-details {
+  margin-top: 15px;
+}
+.doc-details p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .documents-container {
+    padding: 10px;
+  }
+  .doc-form {
+    gap: 10px;
+  }
+  .doc-form input, .doc-form select {
+    padding: 6px;
+  }
+  .doc-form button {
+    padding: 8px;
+  }
+  .identity-card-form,
+  .drivers-license-form {
+    grid-template-columns: 1fr;
+  }
+  .identity-card-form .license-categories .checkbox-group div,
+  .drivers-license-form .license-categories .checkbox-group div {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+  }
+  .identity-card-form button,
+  .drivers-license-form button {
+    grid-column: 1/-1;
+  }
+  .documents-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .document-card {
+    padding: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .documents-container {
+    padding: 5px;
+  }
+  .doc-form {
+    gap: 8px;
+  }
+  .doc-form input, .doc-form select {
+    padding: 5px;
+  }
+  .doc-form button {
+    padding: 6px;
+  }
+  .documents-list {
+    gap: 10px;
+  }
+  .document-card {
+    padding: 10px;
+  }
+}
+
+/*# sourceMappingURL=documents.css.map */

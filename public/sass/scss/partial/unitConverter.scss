@@ -1,0 +1,33 @@
+@use '../variables' as *;
+
+.converter {
+	align-items: center;
+
+	.unit-converter {
+		width: 100%;
+		padding: 1rem;
+		border: $border-color;
+
+		div.row-flex {
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+
+			span {
+				margin-right: 0.5rem;
+			}
+
+			i {
+				background-color: $secondary-color;
+				border: none;
+				border-radius: 50%;
+				width: 50px;
+				height: 50px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+			}
+		}
+	}
+}

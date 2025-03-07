@@ -1,0 +1,51 @@
+@use './variables' as *;
+
+.modal .modal-content div.theme-picker-container {
+  padding: 1rem;
+
+  .predefined-palettes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .palette-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .custom-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input[type="color"] {
+      width: 100px;
+      height: 40px;
+      padding: 0 5px;
+    }
+  }
+}
+
+// Stile per il pulsante tema nell'header
+.theme-button {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+}

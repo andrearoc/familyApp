@@ -1,0 +1,126 @@
+@use 'variables' as *;
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	background-color: $select-bg;
+	padding: 1rem;
+	border-radius: $border-radius;
+	box-shadow: $shadow-dropdown;
+
+	.header-actions {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		h4 {margin: 0;}
+	}
+
+	.tab-container {
+		margin-bottom: 20px;
+
+		.tab-links {
+			display: flex;
+			margin-bottom: 10px;
+			border-bottom: $border;
+
+			.tab-link {
+				padding: 10px 15px;
+				cursor: pointer;
+				background-color: $secondary-color;
+				color: $primary-color;
+				border: none;
+				border-radius: 5px 5px 0 0;
+				margin-right: 0.2rem;
+
+				&.active {
+					background-color: $primary-color;
+					color: $select-bg;
+				}
+			}
+		}
+
+		.tab-content {
+			display: none;
+			padding: 1rem;
+			border: $border;
+			border-radius: $border-radius;
+
+			&.active {
+				display: block;
+
+				h2 {
+					margin-top: 0;
+				}
+
+				.data-table {
+					width: 100%;
+					border-collapse: collapse;
+					margin-bottom: 1rem;
+
+					th, td {
+						padding: 1rem;
+						text-align: left;
+						border-bottom: $border;
+					}
+
+					th {
+						background-color: $secondary-background-color;
+						font-weight: bold;
+					}
+
+					tr:hover {
+						background-color: $background-color;
+					}
+				}
+
+				.form-container {
+					background-color: $secondary-background-color;
+					padding: 1rem;
+					border-radius: $border-radius;
+					margin-top: 1rem;
+
+					.form-group {
+						margin-bottom: 1rem;
+
+						label {
+							display: block;
+							margin-bottom: 5px;
+							font-weight: bold;
+						}
+
+						input, textarea, select {
+							width: 100%;
+							padding: 0.5rem;
+							border: $border;
+							border-radius: $border-radius;
+							box-sizing: border-box;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+button {
+	background-color: $primary-color;
+	color: var(--select-bg);
+	padding: 10px 15px;
+	border: none;
+	border-radius: $border-radius;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $third-color;
+	}
+
+	&.delete-btn {
+		background-color: $red-color;
+
+		&:hover {
+			background-color: $red-dark-color;
+		}
+	}
+}

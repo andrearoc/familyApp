@@ -1,0 +1,30 @@
+@use 'variables' as *;
+
+header {
+	background-color: $primary-color;
+	color: var(--select-bg);
+	height: $header-height;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	box-shadow: $shadow-dropdown;
+
+	.setting-group {
+		display: flex;
+		justify-content: space-between;
+	  right: 1rem;
+	  position: absolute;
+	  width: 3rem;
+
+		i {
+			color: var(--select-bg);
+		}
+	}
+
+	h1, #user {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		width: 50%;
+	}
+}

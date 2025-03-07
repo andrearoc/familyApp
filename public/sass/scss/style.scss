@@ -1,0 +1,26 @@
+@use 'variables' as *;
+
+@use './theme.scss';
+
+@use './header.scss';
+@use './main.scss';
+@use './footer.scss';
+@use './partial/modal.scss';
+
+@use './partial/authPanel.scss';
+@use './partial/passwordGenerator.scss';
+@use './partial/documents.scss';
+@use './partial/unitConverter.scss';
+@use './partial/expenseEstimator.scss';
+@use './partial/hourCalculator.scss';
+@use './partial/qrGenerator.scss';
+
+
+// Base Styles
+body {
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+	color: $text-color;
+	background-color: $secondary-color;
+	font-size: $font-size-base;
+}

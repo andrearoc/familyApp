@@ -1,0 +1,904 @@
+:root {
+  --primary-color: #2A5D43;
+  --secondary-color: #E8F6F0;
+  --third-color: #449f70;
+  --text-color: #3C4A3E;
+  --accent-color: #4cd68f;
+  --border-color: #2f905e;
+  --select-bg: #ffffff;
+  --background-color: #f5f5f5;
+  --secondary-background-color: #f5f5f5;
+  --red-color: #ff0000;
+  --red-dark-color: #cc0000;
+  --icon-size: 1.2rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --shadow-dropdown: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border: 1px solid var(--border-color);
+}
+
+.modal .modal-content div.theme-picker-container {
+  padding: 1rem;
+}
+.modal .modal-content div.theme-picker-container .predefined-palettes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.modal .modal-content div.theme-picker-container .predefined-palettes .palette-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.modal .modal-content div.theme-picker-container .predefined-palettes .palette-button:hover {
+  transform: scale(1.1);
+}
+.modal .modal-content div.theme-picker-container .custom-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal .modal-content div.theme-picker-container .custom-picker input[type=color] {
+  width: 100px;
+  height: 40px;
+  padding: 0 5px;
+}
+
+.theme-button {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.theme-button:hover {
+  color: var(--accent-color);
+}
+
+header {
+  background-color: var(--primary-color);
+  color: var(--select-bg);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: var(--shadow-dropdown);
+}
+header .setting-group {
+  display: flex;
+  justify-content: space-between;
+  right: 1rem;
+  position: absolute;
+  width: 3rem;
+}
+header .setting-group i {
+  color: var(--select-bg);
+}
+header h1, header #user {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--select-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-dropdown);
+}
+.container .header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.container .header-actions h4 {
+  margin: 0;
+}
+.container .tab-container {
+  margin-bottom: 20px;
+}
+.container .tab-container .tab-links {
+  display: flex;
+  margin-bottom: 10px;
+  border-bottom: var(--border);
+}
+.container .tab-container .tab-links .tab-link {
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 5px 5px 0 0;
+  margin-right: 0.2rem;
+}
+.container .tab-container .tab-links .tab-link.active {
+  background-color: var(--primary-color);
+  color: var(--select-bg);
+}
+.container .tab-container .tab-content {
+  display: none;
+  padding: 1rem;
+  border: var(--border);
+  border-radius: 8px;
+}
+.container .tab-container .tab-content.active {
+  display: block;
+}
+.container .tab-container .tab-content.active h2 {
+  margin-top: 0;
+}
+.container .tab-container .tab-content.active .data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+.container .tab-container .tab-content.active .data-table th, .container .tab-container .tab-content.active .data-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: var(--border);
+}
+.container .tab-container .tab-content.active .data-table th {
+  background-color: var(--secondary-background-color);
+  font-weight: bold;
+}
+.container .tab-container .tab-content.active .data-table tr:hover {
+  background-color: var(--background-color);
+}
+.container .tab-container .tab-content.active .form-container {
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.container .tab-container .tab-content.active .form-container .form-group {
+  margin-bottom: 1rem;
+}
+.container .tab-container .tab-content.active .form-container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.container .tab-container .tab-content.active .form-container .form-group input, .container .tab-container .tab-content.active .form-container .form-group textarea, .container .tab-container .tab-content.active .form-container .form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: var(--border);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--select-bg);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--third-color);
+}
+button.delete-btn {
+  background-color: var(--red-color);
+}
+button.delete-btn:hover {
+  background-color: var(--red-dark-color);
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: var(--select-bg);
+  text-align: center;
+  padding: 0.75rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+footer p {
+  font-size: 0.75rem;
+}
+
+#modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(45, 52, 54, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+#modal-backdrop.show {
+  opacity: 1;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  overflow-y: scroll;
+  height: 80%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1rem 2rem rgba(255, 126, 103, 0.15);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+.modal.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.modal .modal-header .close-button {
+  cursor: pointer;
+  padding: 0.375rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+.modal .modal-header .close-button:hover {
+  opacity: 0.7;
+  transform: rotate(90deg);
+}
+.modal .modal-header h2 {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--text-color);
+}
+.modal .modal-content {
+  min-width: 18.75rem;
+  max-width: 37.5rem;
+}
+.modal .modal-content div {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+.modal .modal-content input, .modal .modal-content select, .modal .modal-content button {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+#auth-panel {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#auth-panel div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+#auth-panel div img {
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+}
+#auth-panel div #auth-email, #auth-panel div #auth-password {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+}
+#auth-panel div #auth-submit-btn {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#auth-panel div #auth-submit-btn:hover {
+  background-color: var(--secondary-color);
+}
+#auth-panel div #auth-submit-btn i {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.modal .modal-content #generate-password {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.documents-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.documents-container .doc-form-container {
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.documents-container .doc-form-container h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.doc-form {
+  display: grid;
+  gap: 15px;
+}
+.doc-form input, .doc-form select {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+.doc-form input:focus, .doc-form select:focus {
+  outline: 2px solid var(--accent-color);
+  border-color: transparent;
+}
+.doc-form button {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.doc-form button:hover {
+  background: var(--accent-color);
+}
+
+.identity-card-form {
+  grid-template-columns: repeat(2, 1fr);
+}
+.identity-card-form .license-categories {
+  grid-column: 1/-1;
+}
+.identity-card-form button {
+  grid-column: 1/-1;
+}
+
+.health-card-form {
+  grid-template-columns: 1fr;
+}
+
+.drivers-license-form, .identity-card-form, .health-card-form {
+  grid-template-columns: repeat(2, 1fr);
+}
+.drivers-license-form h4, .identity-card-form h4, .health-card-form h4 {
+  margin: 0;
+}
+.drivers-license-form .license-categories .checkbox-group, .identity-card-form .license-categories .checkbox-group, .health-card-form .license-categories .checkbox-group {
+  display: flex;
+}
+.drivers-license-form .license-categories .checkbox-group label, .identity-card-form .license-categories .checkbox-group label, .health-card-form .license-categories .checkbox-group label {
+  color: var(--text-color);
+}
+
+.documents-list {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.document-card {
+  position: relative;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s;
+}
+.document-card.identity_card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  color: var(--secondary-color);
+}
+.document-card.health_card {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+  color: var(--primary-color);
+}
+.document-card.drivers_license {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  color: var(--text-color);
+}
+.document-card:hover {
+  transform: translateY(-5px);
+}
+.document-card .delete-document-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.document-card .delete-document-btn:hover {
+  background: rgb(255, 0, 0);
+}
+
+.doc-details {
+  margin-top: 15px;
+}
+.doc-details p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .documents-container {
+    padding: 10px;
+  }
+  .doc-form {
+    gap: 10px;
+  }
+  .doc-form input, .doc-form select {
+    padding: 6px;
+  }
+  .doc-form button {
+    padding: 8px;
+  }
+  .identity-card-form,
+  .drivers-license-form {
+    grid-template-columns: 1fr;
+  }
+  .identity-card-form .license-categories .checkbox-group div,
+  .drivers-license-form .license-categories .checkbox-group div {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+  }
+  .identity-card-form button,
+  .drivers-license-form button {
+    grid-column: 1/-1;
+  }
+  .documents-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .document-card {
+    padding: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .documents-container {
+    padding: 5px;
+  }
+  .doc-form {
+    gap: 8px;
+  }
+  .doc-form input, .doc-form select {
+    padding: 5px;
+  }
+  .doc-form button {
+    padding: 6px;
+  }
+  .documents-list {
+    gap: 10px;
+  }
+  .document-card {
+    padding: 10px;
+  }
+}
+.converter {
+  align-items: center;
+}
+.converter .unit-converter {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+.converter .unit-converter div.row-flex {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.converter .unit-converter div.row-flex span {
+  margin-right: 0.5rem;
+}
+.converter .unit-converter div.row-flex i {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.summary-item {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.percentage {
+  color: #666;
+  font-size: 0.9em;
+  margin-left: 0.5rem;
+}
+
+.category-item {
+  padding: 0.3rem 0;
+}
+
+.wishlist-available {
+  padding: 0.5rem;
+  background: #f5f5f5;
+  margin: 0.3rem 0;
+  border-radius: 4px;
+}
+
+.no-items {
+  color: #666;
+  font-style: italic;
+  padding: 0.5rem;
+}
+
+.modal .modal-content div .tabs, .modal .modal-content button .tabs {
+  flex-direction: row;
+  justify-content: space-around;
+}
+.modal .modal-content div .tabs #tab-overview, .modal .modal-content div .tabs #tab-expenses, .modal .modal-content div .tabs #tab-wishlist, .modal .modal-content button .tabs #tab-overview, .modal .modal-content button .tabs #tab-expenses, .modal .modal-content button .tabs #tab-wishlist {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal .modal-content div .tabs #tab-overview i, .modal .modal-content div .tabs #tab-expenses i, .modal .modal-content div .tabs #tab-wishlist i, .modal .modal-content button .tabs #tab-overview i, .modal .modal-content button .tabs #tab-expenses i, .modal .modal-content button .tabs #tab-wishlist i {
+  color: #ffffff;
+  font-size: 20px;
+}
+.modal .modal-content div .tabs #tab-expenses, .modal .modal-content button .tabs #tab-expenses {
+  background-color: var(--third-color);
+}
+.modal .modal-content div .tabs #tab-wishlist, .modal .modal-content button .tabs #tab-wishlist {
+  background-color: var(--accent-color);
+}
+.modal .modal-content div #overview-panel .input-group, .modal .modal-content button #overview-panel .input-group {
+  align-items: center;
+}
+.modal .modal-content div #overview-panel .input-group button#save-income, .modal .modal-content button #overview-panel .input-group button#save-income {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal .modal-content div #overview-panel #monthly-summary .category-item, .modal .modal-content button #overview-panel #monthly-summary .category-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--secondary-color);
+}
+.modal .modal-content div #overview-panel #monthly-summary .category-item:last-child, .modal .modal-content button #overview-panel #monthly-summary .category-item:last-child {
+  border-bottom: none;
+}
+.modal .modal-content div #overview-panel #monthly-summary .category-item .percentage, .modal .modal-content button #overview-panel #monthly-summary .category-item .percentage {
+  margin-left: auto;
+  color: var(--third-color);
+  font-size: 0.9em;
+}
+.modal .modal-content div #overview-panel .backup-controls, .modal .modal-content button #overview-panel .backup-controls {
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid var(--border-color);
+}
+.modal .modal-content div #overview-panel .backup-controls div.row-flex, .modal .modal-content button #overview-panel .backup-controls div.row-flex {
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.modal .modal-content div #overview-panel .backup-controls div.row-flex i, .modal .modal-content button #overview-panel .backup-controls div.row-flex i {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: var(--spacing-md);
+  font-size: 16px;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select {
+  background: var(--select-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select:hover, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select:hover {
+  border-color: var(--third-color);
+  background-color: var(--secondary-color);
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-options, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-options {
+  position: absolute;
+  top: calc(100% + var(--spacing-xs));
+  left: 0;
+  right: 0;
+  background: var(--select-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: var(--shadow-dropdown);
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-options::-webkit-scrollbar, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-options::-webkit-scrollbar {
+  width: 8px;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-options::-webkit-scrollbar-track, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-options::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+  border-radius: 8px;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-options::-webkit-scrollbar-thumb, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-options::-webkit-scrollbar-thumb {
+  background: var(--third-color);
+  border-radius: 8px;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-option, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-option {
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: all 0.3s ease;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-option:hover, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-option:hover {
+  background: var(--secondary-color);
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.selected, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.selected {
+  background: var(--third-color);
+  color: var(--select-bg);
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.category-icon, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.category-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.category-icon.animated, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.category-icon.animated {
+  transition: transform 0.3s ease;
+}
+.modal .modal-content div #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.category-icon.animated:hover, .modal .modal-content button #expenses-panel #expense-form .custom-select-wrapper .custom-select-option.category-icon.animated:hover {
+  transform: scale(1.2);
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item, .modal .modal-content button #expenses-panel #expenses-list .expense-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-sm);
+  background: var(--select-bg);
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item .category, .modal .modal-content button #expenses-panel #expenses-list .expense-item .category {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item .amount, .modal .modal-content button #expenses-panel #expenses-list .expense-item .amount {
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item .description, .modal .modal-content button #expenses-panel #expenses-list .expense-item .description {
+  flex-grow: 1;
+  margin: 0 var(--spacing-md);
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item .date, .modal .modal-content button #expenses-panel #expenses-list .expense-item .date {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item .delete-expense, .modal .modal-content button #expenses-panel #expenses-list .expense-item .delete-expense {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.modal .modal-content div #expenses-panel #expenses-list .expense-item .delete-expense:hover, .modal .modal-content button #expenses-panel #expenses-list .expense-item .delete-expense:hover {
+  opacity: 1;
+}
+.modal .modal-content div #wishlist-panel #wishlist-form, .modal .modal-content button #wishlist-panel #wishlist-form {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+.modal .modal-content div #wishlist-panel #wishlist-items .empty-state, .modal .modal-content button #wishlist-panel #wishlist-items .empty-state {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--text-color);
+  opacity: 0.7;
+  font-style: italic;
+}
+.modal .modal-content div #wishlist-panel #wishlist-items .wishlist-item, .modal .modal-content button #wishlist-panel #wishlist-items .wishlist-item {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+.modal .modal-content div #wishlist-panel #wishlist-items .wishlist-item button, .modal .modal-content button #wishlist-panel #wishlist-items .wishlist-item button {
+  width: fit-content;
+}
+
+.modal .modal-content .timer-container {
+  padding: 1.25rem;
+  text-align: center;
+}
+.modal .modal-content .timer-container .timer-display {
+  font-size: 3rem;
+  margin: 1.25rem 0;
+  color: var(--text-color);
+  font-weight: 600;
+}
+.modal .modal-content .timer-container button {
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.modal .modal-content .timer-container button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+.modal .modal-content .timer-container button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: translateY(-0.125rem);
+}
+.modal .modal-content .timer-container .timer-history {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+.modal .modal-content .timer-container .timer-history .history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.625rem;
+}
+.modal .modal-content .timer-container .timer-history .history-table th, .modal .modal-content .timer-container .timer-history .history-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+.modal .modal-content .timer-container .timer-history .history-table th {
+  background-color: var(--secondary-color);
+  font-weight: 600;
+}
+.modal .modal-content .timer-container .timer-history .history-table tr:hover {
+  background-color: var(--accent-color);
+}
+
+.qr-generator-container {
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.qr-generator-container .input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.qr-generator-container .input-group .qr-input {
+  flex: 1;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+.qr-generator-container .input-group .qr-format {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+.qr-generator-container .input-group .generate-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.qr-generator-container .input-group .generate-button:hover {
+  background-color: var(--accent-color);
+}
+.qr-generator-container .qr-output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.qr-generator-container .qr-output img, .qr-generator-container .qr-output svg {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-width: 200px;
+  margin-bottom: 10px;
+}
+.qr-generator-container .qr-output .download-button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+.qr-generator-container .qr-output .download-button:hover {
+  background-color: #218838;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=style.css.map */
