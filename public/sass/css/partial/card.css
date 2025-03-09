@@ -185,6 +185,7 @@
 .card-wishlist .wishlist-notes {
   margin-top: 1rem;
   font-style: italic;
+  font-size: 0.75rem;
   color: var(--text-color);
 }
 
