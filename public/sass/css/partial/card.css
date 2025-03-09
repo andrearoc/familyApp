@@ -19,7 +19,7 @@
   --border: 1px solid var(--border-color);
 }
 
-.card {
+.card-note, .card-expense, .card-wishlist {
   display: flex;
   flex-direction: column;
   background-color: var(--select-bg);
@@ -32,47 +32,47 @@
   min-width: 12rem;
   height: 100%;
 }
-.card .card-header {
+.card-note .card-header, .card-expense .card-header, .card-wishlist .card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 1rem;
   border-bottom: var(--border);
 }
-.card .card-header .card-title {
+.card-note .card-header .card-title, .card-expense .card-header .card-title, .card-wishlist .card-header .card-title {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
   color: var(--text-color);
   line-height: 1.4;
 }
-.card .card-header .card-date {
+.card-note .card-header .card-date, .card-expense .card-header .card-date, .card-wishlist .card-header .card-date {
   font-size: 12px;
   color: var(--text-color);
   white-space: nowrap;
   margin-left: 1rem;
 }
-.card .card-image {
+.card-note .card-image, .card-expense .card-image, .card-wishlist .card-image {
   width: 100%;
 }
-.card .card-image img {
+.card-note .card-image img, .card-expense .card-image img, .card-wishlist .card-image img {
   width: 100%;
   height: auto;
   display: block;
 }
-.card .card-body {
+.card-note .card-body, .card-expense .card-body, .card-wishlist .card-body {
   padding: 1rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
-.card .card-body .card-content {
+.card-note .card-body .card-content, .card-expense .card-body .card-content, .card-wishlist .card-body .card-content {
   margin-bottom: 12px;
   flex-grow: 1;
   line-height: 1.5;
   color: var(--text-color);
 }
-.card .card-body .card-category {
+.card-note .card-body .card-category, .card-expense .card-body .card-category, .card-wishlist .card-body .card-category {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 8px;
@@ -82,52 +82,52 @@
   text-transform: uppercase;
   background-color: #3498db;
 }
-.card .card-body .card-category[class*=default] {
+.card-note .card-body .card-category[class*=default], .card-expense .card-body .card-category[class*=default], .card-wishlist .card-body .card-category[class*=default] {
   background-color: #3498db;
 }
-.card .card-body .card-category[class*=food] {
+.card-note .card-body .card-category[class*=food], .card-expense .card-body .card-category[class*=food], .card-wishlist .card-body .card-category[class*=food] {
   background-color: #e67e22;
 }
-.card .card-body .card-category[class*=transport] {
+.card-note .card-body .card-category[class*=transport], .card-expense .card-body .card-category[class*=transport], .card-wishlist .card-body .card-category[class*=transport] {
   background-color: #9b59b6;
 }
-.card .card-body .card-category[class*=entertainment] {
+.card-note .card-body .card-category[class*=entertainment], .card-expense .card-body .card-category[class*=entertainment], .card-wishlist .card-body .card-category[class*=entertainment] {
   background-color: #2ecc71;
 }
-.card .card-body .card-category[class*=health] {
+.card-note .card-body .card-category[class*=health], .card-expense .card-body .card-category[class*=health], .card-wishlist .card-body .card-category[class*=health] {
   background-color: #e74c3c;
 }
-.card .card-body .card-category[class*=home] {
+.card-note .card-body .card-category[class*=home], .card-expense .card-body .card-category[class*=home], .card-wishlist .card-body .card-category[class*=home] {
   background-color: #f39c12;
 }
-.card .card-body .card-category[class*=bills] {
+.card-note .card-body .card-category[class*=bills], .card-expense .card-body .card-category[class*=bills], .card-wishlist .card-body .card-category[class*=bills] {
   background-color: #1abc9c;
 }
-.card .card-body .card-category[class*=note] {
+.card-note .card-body .card-category[class*=note], .card-expense .card-body .card-category[class*=note], .card-wishlist .card-body .card-category[class*=note] {
   background-color: #3498db;
 }
-.card .card-body .card-category[class*=expense] {
+.card-note .card-body .card-category[class*=expense], .card-expense .card-body .card-category[class*=expense], .card-wishlist .card-body .card-category[class*=expense] {
   background-color: #e74c3c;
 }
-.card .card-body .card-category[class*=wishlist] {
+.card-note .card-body .card-category[class*=wishlist], .card-expense .card-body .card-category[class*=wishlist], .card-wishlist .card-body .card-category[class*=wishlist] {
   background-color: #f39c12;
 }
-.card .card-footer {
+.card-note .card-footer, .card-expense .card-footer, .card-wishlist .card-footer {
   padding: 1rem;
   border-top: var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.card .card-footer .card-footer-content {
+.card-note .card-footer .card-footer-content, .card-expense .card-footer .card-footer-content, .card-wishlist .card-footer .card-footer-content {
   font-size: 14px;
   color: var(--text-color);
 }
-.card .card-footer .card-actions {
+.card-note .card-footer .card-actions, .card-expense .card-footer .card-actions, .card-wishlist .card-footer .card-actions {
   display: flex;
   gap: 8px;
 }
-.card .card-footer .card-actions button {
+.card-note .card-footer .card-actions button, .card-expense .card-footer .card-actions button, .card-wishlist .card-footer .card-actions button {
   background: none;
   border: none;
   cursor: pointer;
@@ -135,7 +135,7 @@
   border-radius: 8px;
   transition: background-color 0.2s;
 }
-.card .card-footer .card-actions button:hover {
+.card-note .card-footer .card-actions button:hover, .card-expense .card-footer .card-actions button:hover, .card-wishlist .card-footer .card-actions button:hover {
   background-color: #f5f5f5;
 }
 

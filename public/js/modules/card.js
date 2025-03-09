@@ -23,7 +23,8 @@ export default class Card {
 
   render() {
     const card = document.createElement('div');
-    card.classList.add(this.config.cardClass);
+    // card.classList.add(this.config.cardClass);
+		card.classList.add(`card-${this.config.type.replace(/\s+/g, '-')}`);
     card.dataset.id = this.config.id;
     card.dataset.type = this.config.type;
 
