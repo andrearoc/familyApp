@@ -11,13 +11,15 @@ header {
 
 	.setting-group {
 		display: flex;
-		justify-content: space-between;
-	  right: 1rem;
-	  position: absolute;
-	  width: 3rem;
+		align-items: center;
+
+		h4 {
+			margin: 0;
+		}
 
 		i {
 			color: var(--select-bg);
+			margin-right: 1rem;
 		}
 	}
 

@@ -45,3 +45,31 @@ $font-size-base: 16px;
 $border-radius: 8px;
 $header-height: 4rem;
 $modal-animation-time: 0.3s;
+
+// Variabili per colori e dimensioni
+$card-bg: $select-bg;
+$card-shadow: $shadow-dropdown;
+$card-radius: $border-radius;
+$card-padding: 1rem;
+$card-margin: 0.75rem;
+$card-border: $border;
+
+// Colori per le categorie e priorità
+$colors: (
+  'default': #3498db,
+  'food': #e67e22,
+  'transport': #9b59b6,
+  'entertainment': #2ecc71,
+  'health': #e74c3c,
+  'home': #f39c12,
+  'bills': #1abc9c,
+  'note': #3498db,
+  'expense': #e74c3c,
+  'wishlist': #f39c12
+);
+
+$priorities: (
+  'high': #e74c3c,
+  'medium': #f39c12,
+  'low': #2ecc71
+);

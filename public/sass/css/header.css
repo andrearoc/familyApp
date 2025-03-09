@@ -30,13 +30,14 @@ header {
 }
 header .setting-group {
   display: flex;
-  justify-content: space-between;
-  right: 1rem;
-  position: absolute;
-  width: 3rem;
+  align-items: center;
+}
+header .setting-group h4 {
+  margin: 0;
 }
 header .setting-group i {
   color: var(--select-bg);
+  margin-right: 1rem;
 }
 header h1, header #user {
   display: flex;

@@ -20,7 +20,7 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   background-color: var(--select-bg);
   padding: 1rem;
@@ -29,23 +29,26 @@
 }
 .container .header-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin-bottom: 1rem;
 }
-.container .header-actions h4 {
-  margin: 0;
+.container .header-actions i {
+  color: var(--primary-color);
 }
 .container .tab-container {
   margin-bottom: 20px;
 }
 .container .tab-container .tab-links {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 10px;
   border-bottom: var(--border);
 }
 .container .tab-container .tab-links .tab-link {
-  padding: 10px 15px;
+  flex: 1;
+  text-align: center;
+  padding: 10px;
   cursor: pointer;
   background-color: var(--secondary-color);
   color: var(--primary-color);
@@ -69,52 +72,80 @@
 .container .tab-container .tab-content.active h2 {
   margin-top: 0;
 }
+.container .tab-container .tab-content.active .form-container form {
+  display: flex;
+  flex-direction: column;
+}
+.container .tab-container .tab-content.active .form-container form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+.container .tab-container .tab-content.active .form-container form .form-group input, .container .tab-container .tab-content.active .form-container form .form-group textarea, .container .tab-container .tab-content.active .form-container form .form-group select {
+  padding: 0.5rem;
+}
 .container .tab-container .tab-content.active .data-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1rem;
 }
-.container .tab-container .tab-content.active .data-table th, .container .tab-container .tab-content.active .data-table td {
-  padding: 1rem;
+@media (max-width: 768px) {
+  .container .tab-container .tab-content.active .data-table {
+    display: block;
+  }
+}
+.container .tab-container .tab-content.active .data-table tr {
+  font-size: 0.85rem;
+}
+@media (max-width: 768px) {
+  .container .tab-container .tab-content.active .data-table tr {
+    display: block;
+    background: var(--select-bg);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-dropdown);
+  }
+}
+.container .tab-container .tab-content.active .data-table th {
+  padding: 0.5rem;
   text-align: left;
   border-bottom: var(--border);
 }
-.container .tab-container .tab-content.active .data-table th {
-  background-color: var(--secondary-background-color);
-  font-weight: bold;
+@media (max-width: 768px) {
+  .container .tab-container .tab-content.active .data-table th {
+    display: none;
+  }
 }
-.container .tab-container .tab-content.active .data-table tr:hover {
-  background-color: var(--background-color);
+.container .tab-container .tab-content.active .data-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: var(--border);
 }
-.container .tab-container .tab-content.active .form-container {
-  background-color: var(--secondary-background-color);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-top: 1rem;
-}
-.container .tab-container .tab-content.active .form-container .form-group {
-  margin-bottom: 1rem;
-}
-.container .tab-container .tab-content.active .form-container .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-.container .tab-container .tab-content.active .form-container .form-group input, .container .tab-container .tab-content.active .form-container .form-group textarea, .container .tab-container .tab-content.active .form-container .form-group select {
-  width: 100%;
-  padding: 0.5rem;
-  border: var(--border);
-  border-radius: 8px;
-  box-sizing: border-box;
+@media (max-width: 768px) {
+  .container .tab-container .tab-content.active .data-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: none;
+  }
+  .container .tab-container .tab-content.active .data-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 10px;
+  }
 }
 
 button {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
   background-color: var(--primary-color);
   color: var(--select-bg);
-  padding: 10px 15px;
+  padding: 10px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 1rem;
 }
 button:hover {
   background-color: var(--third-color);

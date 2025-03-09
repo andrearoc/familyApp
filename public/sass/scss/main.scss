@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .container {
-	max-width: 1200px;
+	max-width: 100%;
 	margin: 0 auto;
 	background-color: $select-bg;
 	padding: 1rem;
@@ -10,11 +10,13 @@
 
 	.header-actions {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-evenly;
 		align-items: center;
 		margin-bottom: 1rem;
 
-		h4 {margin: 0;}
+		i {
+			color: $primary-color;
+		}
 	}
 
 	.tab-container {
@@ -22,11 +24,14 @@
 
 		.tab-links {
 			display: flex;
+			flex-wrap: wrap;
 			margin-bottom: 10px;
 			border-bottom: $border;
 
 			.tab-link {
-				padding: 10px 15px;
+				flex: 1;
+				text-align: center;
+				padding: 10px;
 				cursor: pointer;
 				background-color: $secondary-color;
 				color: $primary-color;
@@ -54,48 +59,71 @@
 					margin-top: 0;
 				}
 
+				.form-container {
+					form {
+						display: flex;
+						flex-direction: column;
+
+						.form-group {
+							display: flex;
+							flex-direction: column;
+							margin-bottom: 0.5rem;
+
+							input, textarea, select {
+								padding: 0.5rem;
+							}
+						}
+					}
+				}
+
 				.data-table {
 					width: 100%;
 					border-collapse: collapse;
 					margin-bottom: 1rem;
 
-					th, td {
-						padding: 1rem;
-						text-align: left;
-						border-bottom: $border;
+					@media (max-width: 768px) {
+						display: block;
+					}
+
+					tr {
+						font-size: 0.85rem;
+
+						@media (max-width: 768px) {
+							display: block;
+							background: $select-bg;
+							margin-bottom: 1rem;
+							padding: 1rem;
+							border-radius: $border-radius;
+							box-shadow: $shadow-dropdown;
+						}
 					}
 
 					th {
-						background-color: $secondary-background-color;
-						font-weight: bold;
-					}
+						padding: 0.5rem;
+						text-align: left;
+						border-bottom: $border;
 
-					tr:hover {
-						background-color: $background-color;
-					}
-				}
-
-				.form-container {
-					background-color: $secondary-background-color;
-					padding: 1rem;
-					border-radius: $border-radius;
-					margin-top: 1rem;
-
-					.form-group {
-						margin-bottom: 1rem;
-
-						label {
-							display: block;
-							margin-bottom: 5px;
-							font-weight: bold;
+						@media (max-width: 768px) {
+							display: none;
 						}
+					}
 
-						input, textarea, select {
-							width: 100%;
+					td {
+						padding: 0.75rem;
+						text-align: left;
+						border-bottom: $border;
+
+						@media (max-width: 768px) {
+							display: flex;
+							justify-content: space-between;
 							padding: 0.5rem;
-							border: $border;
-							border-radius: $border-radius;
-							box-sizing: border-box;
+							border-bottom: none;
+
+							&::before {
+								content: attr(data-label);
+								font-weight: bold;
+								margin-right: 10px;
+							}
 						}
 					}
 				}
@@ -105,12 +133,15 @@
 }
 
 button {
+	font-family: "Montserrat", sans-serif;
+	width: 100%;
 	background-color: $primary-color;
 	color: var(--select-bg);
-	padding: 10px 15px;
+	padding: 10px;
 	border: none;
 	border-radius: $border-radius;
 	cursor: pointer;
+	font-size: 1rem;
 
 	&:hover {
 		background-color: $third-color;

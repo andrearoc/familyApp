@@ -1,0 +1,196 @@
+@use '../variables' as *;
+
+// Base della card
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $card-bg;
+  border-radius: $card-radius;
+  box-shadow: $card-shadow;
+  // margin: $card-margin;
+  border: $card-border;
+  transition: all 0.3s ease;
+  overflow: hidden;
+	min-width: 12rem;
+  height: 100%;
+
+  // Header della card
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: $card-padding;
+    border-bottom: 1px solid #f0f0f0;
+
+    .card-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .card-date {
+      font-size: 12px;
+      color: #777;
+      white-space: nowrap;
+      margin-left: $card-padding;
+    }
+  }
+
+  // Immagine della card
+  .card-image {
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  // Corpo della card
+  .card-body {
+    padding: $card-padding;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    .card-content {
+      margin-bottom: 12px;
+      flex-grow: 1;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .card-category {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: white;
+      text-transform: uppercase;
+      background-color: map-get($colors, 'default');
+
+      @each $name, $color in $colors {
+        &[class*="#{$name}"] {
+          background-color: $color;
+        }
+      }
+    }
+  }
+
+  // Footer della card
+  .card-footer {
+    padding: $card-padding;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-footer-content {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+
+      .card-edit-btn {
+        color: #3498db;
+      }
+
+      .card-delete-btn {
+        color: #e74c3c;
+      }
+    }
+  }
+}
+
+// Tipi di card specifici
+.card-note {
+  border-top: 4px solid map-get($colors, 'note');
+}
+
+.card-expense {
+  border-top: 4px solid map-get($colors, 'expense');
+
+  .expense-amount {
+    font-size: 24px;
+    font-weight: 600;
+    color: map-get($colors, 'expense');
+    margin-bottom: 8px;
+    text-align: center;
+  }
+}
+
+.card-wishlist {
+  border-top: 4px solid map-get($colors, 'wishlist');
+
+  .wishlist-price {
+    font-size: 22px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .wishlist-priority {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 8px;
+
+    &.priority-high {
+      background-color: map-get($priorities, 'high');
+    }
+
+    &.priority-medium {
+      background-color: map-get($priorities, 'medium');
+    }
+
+    &.priority-low {
+      background-color: map-get($priorities, 'low');
+    }
+  }
+
+  .wishlist-notes {
+    margin-top: 12px;
+    font-style: italic;
+    color: #666;
+    font-size: 13px;
+  }
+}
+
+// Responsive media queries
+@media (max-width: 768px) {
+  .card {
+    .card-header {
+      flex-direction: column;
+
+      .card-date {
+        margin-left: 0;
+        margin-top: 4px;
+      }
+    }
+  }
+}
