@@ -27,3 +27,8 @@ body {
 	background-color: $secondary-color;
 	font-size: $font-size-base;
 }
+
+/* Nascondi i form modali originali */
+.form-modal {
+  display: none;
+}

@@ -91,6 +91,7 @@ header h1, header #user {
 
 .container {
   max-width: 100%;
+  height: 100vh;
   margin: 0 auto;
   background-color: var(--select-bg);
   padding: 1rem;
@@ -132,12 +133,27 @@ header h1, header #user {
 }
 .container .tab-container .tab-content {
   display: none;
+  height: 60vh;
   padding: 1rem;
   border: var(--border);
   border-radius: 8px;
 }
 .container .tab-container .tab-content.active {
   display: block;
+}
+.container .tab-container .tab-content.active .tab-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.container .tab-container .tab-content.active .tab-header .add-button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #4a90e2;
+  transition: color 0.3s;
+}
+.container .tab-container .tab-content.active .tab-header .add-button:hover {
+  color: #2a6bb1;
 }
 .container .tab-container .tab-content.active h2 {
   margin-top: 0;
@@ -351,15 +367,15 @@ footer p {
   background-color: rgb(255, 255, 255);
 }
 .slider-container .slider-control.slider-prev {
-  left: 10px;
+  left: 0;
 }
 .slider-container .slider-control.slider-next {
-  right: 10px;
+  right: 0;
 }
 .slider-container .slider-indicators {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 2rem;
 }
 .slider-container .slider-indicators .slider-indicator {
   width: 10px;
@@ -407,6 +423,7 @@ footer p {
   background-color: var(--select-bg);
   border-radius: 8px;
   box-shadow: var(--shadow-dropdown);
+  max-width: 15rem;
   border: var(--border);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -418,18 +435,18 @@ footer p {
   justify-content: space-between;
   align-items: flex-start;
   padding: 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: var(--border);
 }
 .card .card-header .card-title {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   line-height: 1.4;
 }
 .card .card-header .card-date {
   font-size: 12px;
-  color: #777;
+  color: var(--text-color);
   white-space: nowrap;
   margin-left: 1rem;
 }
@@ -451,15 +468,15 @@ footer p {
   margin-bottom: 12px;
   flex-grow: 1;
   line-height: 1.5;
-  color: #444;
+  color: var(--text-color);
 }
 .card .card-body .card-category {
   display: inline-block;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 500;
-  color: white;
+  color: var(--select-bg);
   text-transform: uppercase;
   background-color: #3498db;
 }
@@ -495,14 +512,14 @@ footer p {
 }
 .card .card-footer {
   padding: 1rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .card .card-footer .card-footer-content {
   font-size: 14px;
-  color: #666;
+  color: var(--text-color);
 }
 .card .card-footer .card-actions {
   display: flex;
@@ -512,19 +529,12 @@ footer p {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 8px;
   transition: background-color 0.2s;
 }
 .card .card-footer .card-actions button:hover {
   background-color: #f5f5f5;
-}
-.card .card-footer .card-actions .card-edit-btn {
-  color: #3498db;
-}
-.card .card-footer .card-actions .card-delete-btn {
-  color: #e74c3c;
 }
 
 .card-note {
@@ -548,18 +558,18 @@ footer p {
 .card-wishlist .wishlist-price {
   font-size: 22px;
   font-weight: 600;
-  color: #444;
-  margin-bottom: 12px;
+  color: var(--text-color);
+  margin-bottom: 1rem;
   text-align: center;
 }
 .card-wishlist .wishlist-priority {
   display: inline-block;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 500;
-  color: white;
-  margin-bottom: 8px;
+  color: var(--select-bg);
+  margin-bottom: 0.5rem;
 }
 .card-wishlist .wishlist-priority.priority-high {
   background-color: #e74c3c;
@@ -571,10 +581,9 @@ footer p {
   background-color: #2ecc71;
 }
 .card-wishlist .wishlist-notes {
-  margin-top: 12px;
+  margin-top: 1rem;
   font-style: italic;
-  color: #666;
-  font-size: 13px;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
@@ -1204,6 +1213,11 @@ body {
   color: var(--text-color);
   background-color: var(--secondary-color);
   font-size: 16px;
+}
+
+/* Nascondi i form modali originali */
+.form-modal {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

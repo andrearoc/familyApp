@@ -2,6 +2,7 @@
 
 .container {
 	max-width: 100%;
+	height: 100vh;
 	margin: 0 auto;
 	background-color: $select-bg;
 	padding: 1rem;
@@ -48,12 +49,30 @@
 
 		.tab-content {
 			display: none;
+			height: 60vh;
 			padding: 1rem;
 			border: $border;
 			border-radius: $border-radius;
 
 			&.active {
 				display: block;
+
+				.tab-header {
+					display: flex;
+					justify-content: space-between;
+					margin-bottom: 15px;
+
+					.add-button {
+						cursor: pointer;
+						font-size: 1.2rem;
+						color: #4a90e2;
+						transition: color 0.3s;
+
+						&:hover {
+							color: #2a6bb1;
+						}
+					}
+				}
 
 				h2 {
 					margin-top: 0;

@@ -21,6 +21,7 @@
 
 .container {
   max-width: 100%;
+  height: 100vh;
   margin: 0 auto;
   background-color: var(--select-bg);
   padding: 1rem;
@@ -62,12 +63,27 @@
 }
 .container .tab-container .tab-content {
   display: none;
+  height: 60vh;
   padding: 1rem;
   border: var(--border);
   border-radius: 8px;
 }
 .container .tab-container .tab-content.active {
   display: block;
+}
+.container .tab-container .tab-content.active .tab-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.container .tab-container .tab-content.active .tab-header .add-button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #4a90e2;
+  transition: color 0.3s;
+}
+.container .tab-container .tab-content.active .tab-header .add-button:hover {
+  color: #2a6bb1;
 }
 .container .tab-container .tab-content.active h2 {
   margin-top: 0;
