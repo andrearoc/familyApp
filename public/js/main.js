@@ -1,6 +1,6 @@
-import { googleAuthService } from '../../admin/js/google-auth-service.js';
+import { googleAuthService } from '../../admin/js/sheet/google-auth-service.js';
 import { expenseManager } from './modules/expenseEstimator.js';
-import { dataSyncService } from '../../admin/js/data-sync-service.js';
+import { dataSyncService } from '../../admin/js/sheet/data-sync-service.js';
 import TEMA from './modules/theme.js'
 import MDL from './modules/modal.js';
 

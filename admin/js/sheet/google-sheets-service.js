@@ -1,4 +1,4 @@
-import { GOOGLE_CONFIG } from './config.js';
+import { GOOGLE_CONFIG } from '../config.js';
 import { googleAuthService } from './google-auth-service.js';
 
 export class GoogleSheetsService {
