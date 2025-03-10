@@ -25,6 +25,7 @@ session_start();
         <button class="tab-link active" onclick="openTab(event, 'notes-tab')">Note</button>
         <button class="tab-link" onclick="openTab(event, 'expenses-tab')">Spese</button>
         <button class="tab-link" onclick="openTab(event, 'wishlist-tab')">Wishlist</button>
+				<button class="tab-link" onclick="openTab(event, 'calendar-tab')">Calendario</button>
       </div>
 
       <!-- Tab Note -->
@@ -35,6 +36,9 @@ session_start();
 
       <!-- Tab Wishlist -->
       <?php include 'tabs/wishlist.php'; ?>
+
+			<!-- Tab Calendario -->
+			<?php include 'tabs/calendar.php'; ?>
     </div>
   </div>
 

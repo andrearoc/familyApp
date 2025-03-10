@@ -1,5 +1,5 @@
 import { GOOGLE_CONFIG } from '../config.js';
-import { googleAuthService } from './google-auth-service.js';
+import { googleAuthService } from '../google-auth-service.js';
 
 export class GoogleSheetsService {
   // Legge i valori da un foglio

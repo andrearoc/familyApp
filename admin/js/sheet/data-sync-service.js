@@ -1,5 +1,5 @@
 import { googleSheetsService } from './google-sheets-service.js';
-import { googleAuthService } from './google-auth-service.js';
+import { googleAuthService } from '../google-auth-service.js';
 import { expenseManager } from '../../../public/js/modules/expenseEstimator.js';
 import { SHEET_RANGES, GOOGLE_CONFIG } from '../config.js';
 

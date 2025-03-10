@@ -1,7 +1,8 @@
-import { googleAuthService } from '../../admin/js/sheet/google-auth-service.js';
+import { googleAuthService } from '../../admin/js/google-auth-service.js';
 import { expenseManager } from './modules/expenseEstimator.js';
 import { dataSyncService } from '../../admin/js/sheet/data-sync-service.js';
-import TEMA from './modules/theme.js'
+import { googleCalendarService } from '../../admin/js/calendar/google-calendar-service.js';
+import TEMA from './modules/theme.js';
 import MDL from './modules/modal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,9 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('expenses-container'),
       document.getElementById('wishlist-container')
     );
+
+    // Inizializza e incorpora il calendario
+    googleCalendarService.embedCalendar('calendar-container');
+
+    // Carica gli eventi del calendario
+    loadCalendarEvents();
   }
 
-  // Inizializza il gestore spese con i container per le tabelle
+  // Gestione autenticazione
   document.getElementById('google-auth-btn').addEventListener('click', () => {
     if (googleAuthService.isAuthenticated()) {
       googleAuthService.logout();
@@ -38,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('expenses-container'),
           document.getElementById('wishlist-container')
         );
+
+        // Inizializza e incorpora il calendario dopo l'autenticazione
+        googleCalendarService.embedCalendar('calendar-container');
+
+        // Carica gli eventi del calendario
+        loadCalendarEvents();
       });
     }
   });
@@ -47,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('notes-container').innerHTML = '';
     document.getElementById('expenses-container').innerHTML = '';
     document.getElementById('wishlist-container').innerHTML = '';
+    document.getElementById('calendar-container').innerHTML = '';
   }
 
   // Aggiungi listener per i form di aggiunta elementi
@@ -58,8 +72,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Aggiungi listener per il pulsante sincronizzazione
   document.getElementById('sync-btn').addEventListener('click', async () => {
     await dataSyncService.syncDataToSheets();
+    // Aggiorna tutti i dati dopo la sincronizzazione
+    await expenseManager.refreshAll();
   });
 });
+
+// Funzione per caricare gli eventi del calendario
+async function loadCalendarEvents() {
+  const today = new Date();
+  const nextMonth = new Date();
+  nextMonth.setMonth(today.getMonth() + 1);
+
+  const events = await googleCalendarService.getEvents(
+    undefined, // Usa l'ID predefinito
+    today,
+    nextMonth
+  );
+
+  console.log('Eventi caricati:', events);
+  // Elabora gli eventi come necessario
+}
 
 // Imposta i listener per i form
 function setupFormListeners() {
@@ -103,6 +135,38 @@ function setupFormListeners() {
       expenseManager.addWishlistItem(name, price, priority, notes);
       document.getElementById('add-wishlist-form').reset();
       MDL.close(); // Chiudi il modale dopo l'aggiunta
+    }
+  });
+
+  // Form per aggiungere eventi al calendario
+  document.getElementById('add-event-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('event-title').value;
+    const start = document.getElementById('event-start').value;
+    const end = document.getElementById('event-end').value;
+    const description = document.getElementById('event-description').value;
+
+    if (title && start && end) {
+      const event = {
+        'summary': title,
+        'description': description,
+        'start': {
+          'dateTime': new Date(start).toISOString(),
+          'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+        },
+        'end': {
+          'dateTime': new Date(end).toISOString(),
+          'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+        }
+      };
+
+      googleCalendarService.createEvent(undefined, event)
+        .then(() => {
+          // Aggiorna la visualizzazione del calendario
+          googleCalendarService.embedCalendar('calendar-container');
+          document.getElementById('add-event-form').reset();
+          MDL.close();
+        });
     }
   });
 }

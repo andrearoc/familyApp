@@ -1,4 +1,4 @@
-import { GOOGLE_CONFIG } from '../config.js';
+import { GOOGLE_CONFIG } from './config.js';
 
 export class GoogleAuthService {
   constructor() {
@@ -26,25 +26,28 @@ export class GoogleAuthService {
   }
 
   // Inizializza il client Google
-  initClient() {
-    try {
-      this.loadGoogleLibraries();
+		initClient() {
+			try {
+				this.loadGoogleLibraries();
 
-      window.gapi.load('client', () => {
-        window.gapi.client.init({
-          apiKey: GOOGLE_CONFIG.API_KEY,
-          discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
-        });
-      });
+				window.gapi.load('client', () => {
+					window.gapi.client.init({
+						apiKey: GOOGLE_CONFIG.API_KEY,
+						discoveryDocs: [
+							"https://sheets.googleapis.com/$discovery/rest?version=v4",
+							"https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+						]
+					});
+				});
 
-      console.log('✅ Client Google inizializzato');
-      this.initialized = true;
-      return true;
-    } catch (error) {
-      console.error('❌ Errore inizializzazione client:', error);
-      return false;
-    }
-  }
+				console.log('✅ Client Google inizializzato');
+				this.initialized = true;
+				return true;
+			} catch (error) {
+				console.error('❌ Errore inizializzazione client:', error);
+				return false;
+			}
+		}
 
   // Autenticazione
 	authenticate(callback) {

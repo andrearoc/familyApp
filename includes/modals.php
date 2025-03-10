@@ -85,4 +85,30 @@
       </form>
     </div>
   </div>
+
+	<!-- Modal Eventi -->
+	<div id="event-form-modal" class="form-modal">
+		<div class="form-container">
+			<h3>Aggiungi Evento</h3>
+			<form id="add-event-form">
+				<div class="form-group">
+					<label for="event-title">Titolo</label>
+					<input type="text" id="event-title" required>
+				</div>
+				<div class="form-group">
+					<label for="event-start">Data inizio</label>
+					<input type="datetime-local" id="event-start" required>
+				</div>
+				<div class="form-group">
+					<label for="event-end">Data fine</label>
+					<input type="datetime-local" id="event-end" required>
+				</div>
+				<div class="form-group">
+					<label for="event-description">Descrizione</label>
+					<textarea id="event-description"></textarea>
+				</div>
+				<button type="submit" class="btn">Aggiungi evento</button>
+			</form>
+		</div>
+	</div>
 </div>
