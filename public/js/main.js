@@ -3,6 +3,7 @@ import { dataSyncService } from '../../admin/js/sheet/data-sync-service.js';
 import { googleCalendarService } from '../../admin/js/calendar/google-calendar-service.js';
 
 import { expenseManager } from './modules/sheet/expenseEstimator.js';
+import { calendarManager } from './modules/calendar/calendar.js';
 
 import TEMA from './modules/theme.js';
 import MDL from './modules/modal.js';
@@ -26,11 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('wishlist-container')
     );
 
-    // Inizializza e incorpora il calendario
-    googleCalendarService.embedCalendar('calendar-container');
-
-    // Carica gli eventi del calendario
-    loadCalendarEvents();
+    // Carica gli eventi del calendario tramite calendarManager
+    calendarManager.init(document.getElementById('calendar-events-container'));
   }
 
   // Gestione autenticazione
@@ -48,11 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('wishlist-container')
         );
 
-        // Inizializza e incorpora il calendario dopo l'autenticazione
-        googleCalendarService.embedCalendar('calendar-container');
-
-        // Carica gli eventi del calendario
-        loadCalendarEvents();
+        // Carica gli eventi del calendario tramite calendarManager
+        calendarManager.init(document.getElementById('calendar-events-container'));
       });
     }
   });
@@ -63,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('expenses-container').innerHTML = '';
     document.getElementById('wishlist-container').innerHTML = '';
     document.getElementById('calendar-container').innerHTML = '';
+    document.getElementById('calendar-events-container').innerHTML = '';
   }
 
   // Aggiungi listener per i form di aggiunta elementi
@@ -149,23 +145,9 @@ function setupFormListeners() {
     const description = document.getElementById('event-description').value;
 
     if (title && start && end) {
-      const event = {
-        'summary': title,
-        'description': description,
-        'start': {
-          'dateTime': new Date(start).toISOString(),
-          'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
-        },
-        'end': {
-          'dateTime': new Date(end).toISOString(),
-          'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
-        }
-      };
-
-      googleCalendarService.createEvent(undefined, event)
+      // Usa calendarManager per aggiungere l'evento
+      calendarManager.addEvent(title, start, end, description)
         .then(() => {
-          // Aggiorna la visualizzazione del calendario
-          googleCalendarService.embedCalendar('calendar-container');
           document.getElementById('add-event-form').reset();
           MDL.close();
         });

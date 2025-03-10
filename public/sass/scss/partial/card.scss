@@ -1,7 +1,7 @@
 @use '../variables' as *;
 
 // Base della card
-.card-note, .card-expense, .card-wishlist {
+.card-note, .card-expense, .card-wishlist, .card-event {
   display: flex;
   flex-direction: column;
   background-color: $card-bg;
