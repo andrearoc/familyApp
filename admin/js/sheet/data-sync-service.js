@@ -1,6 +1,8 @@
 import { googleSheetsService } from './google-sheets-service.js';
 import { googleAuthService } from '../google-auth-service.js';
-import { expenseManager } from '../../../public/js/modules/expenseEstimator.js';
+import { noteManager } from '../../../public/js/modules/sheet/note.js';
+import { expenseTracker } from '../../../public/js/modules/sheet/expense.js';
+import { wishlistManager } from '../../../public/js/modules/sheet/wishlist.js';
 import { SHEET_RANGES, GOOGLE_CONFIG } from '../config.js';
 
 export class DataSyncService {
@@ -50,7 +52,7 @@ export class DataSyncService {
 
       // Converti i dati in oggetti note
       if (existingData && Array.isArray(existingData)) {
-        expenseManager.notes = existingData.map(row => ({
+        noteManager.notes = existingData.map(row => ({
           id: row[0],
           title: row[1],
           content: row[2],
@@ -58,12 +60,12 @@ export class DataSyncService {
           date: row[4]
         }));
 
-        expenseManager.renderNotes();
+        noteManager.renderNotesAsCards();
       }
 
       // Se ci sono note nel manager, aggiorna il foglio
-      if (expenseManager.notes && expenseManager.notes.length > 0) {
-        const noteValues = expenseManager.notes.map(note => [
+      if (noteManager.notes && noteManager.notes.length > 0) {
+        const noteValues = noteManager.notes.map(note => [
           note.id,
           note.title,
           note.content,
@@ -104,7 +106,7 @@ export class DataSyncService {
 
       // Converti i dati in oggetti wishlist
       if (existingData && Array.isArray(existingData)) {
-        expenseManager.wishlist = existingData.map(row => ({
+        wishlistManager.wishlist = existingData.map(row => ({
           id: row[0],
           name: row[1],
           estimatedPrice: parseFloat(row[2]),
@@ -112,12 +114,12 @@ export class DataSyncService {
           notes: row[4] || ''
         }));
 
-        expenseManager.renderWishlist();
+        wishlistManager.renderWishlistAsCards();
       }
 
       // Se ci sono elementi nella wishlist, aggiorna il foglio
-      if (expenseManager.wishlist && expenseManager.wishlist.length > 0) {
-        const wishlistValues = expenseManager.wishlist.map(item => [
+      if (wishlistManager.wishlist && wishlistManager.wishlist.length > 0) {
+        const wishlistValues = wishlistManager.wishlist.map(item => [
           item.id,
           item.name,
           item.estimatedPrice,
@@ -158,7 +160,7 @@ export class DataSyncService {
 
       // Converti i dati in oggetti spese
       if (existingData && Array.isArray(existingData)) {
-        expenseManager.expenses = existingData.map(row => ({
+        expenseTracker.expenses = existingData.map(row => ({
           id: row[0],
           amount: parseFloat(row[1]),
           category: row[2],
@@ -166,12 +168,12 @@ export class DataSyncService {
           date: row[4]
         }));
 
-        expenseManager.renderExpenses();
+        expenseTracker.renderExpensesAsCards();
       }
 
       // Se ci sono spese nel manager, aggiorna il foglio
-      if (expenseManager.expenses && expenseManager.expenses.length > 0) {
-        const expenseValues = expenseManager.expenses.map(expense => [
+      if (expenseTracker.expenses && expenseTracker.expenses.length > 0) {
+        const expenseValues = expenseTracker.expenses.map(expense => [
           expense.id,
           expense.amount,
           expense.category,
@@ -205,15 +207,15 @@ export class DataSyncService {
       let sheetName;
       switch(type) {
         case 'ListaSpesa':
-          expenseManager.removeExpense(itemId); // Corretto: era removeWishlistItem
+          expenseTracker.removeExpense(itemId);
           sheetName = 'ListaSpesa';
           break;
         case 'SpeseCasa':
-          expenseManager.removeWishlistItem(itemId); // Corretto: era removeExpense
+          wishlistManager.removeWishlistItem(itemId);
           sheetName = 'SpeseCasa';
           break;
         case 'Note':
-          expenseManager.removeNote(itemId);
+          noteManager.removeNote(itemId);
           sheetName = 'Note';
           break;
         default:

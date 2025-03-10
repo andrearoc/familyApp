@@ -1,8 +1,8 @@
 // expense.js
-import { SHEET_RANGES, GOOGLE_CONFIG } from '../../../admin/js/config.js';
-import { googleSheetsService } from '../../../admin/js/sheet/google-sheets-service.js';
-import Card from './card.js';
-import Slider from './slider.js';
+import { SHEET_RANGES, GOOGLE_CONFIG } from '../../../../admin/js/config.js';
+import { googleSheetsService } from '../../../../admin/js/sheet/google-sheets-service.js';
+import Card from '../card.js';
+import Slider from '../slider.js';
 
 class ExpenseTracker {
   constructor() {
