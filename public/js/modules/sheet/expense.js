@@ -104,44 +104,84 @@ class ExpenseTracker {
     }
   }
 
-  editExpense(id) {
-    const expense = this.expenses.find(expense => expense.id === id);
-    if (!expense) return;
+	editExpense(id) {
+		const expense = this.expenses.find(expense => expense.id === id);
+		if (!expense) return;
 
-    // Qui puoi implementare la logica per aprire un form di modifica
-    // Per ora, impostiamo solo i valori del form di aggiunta spese
-    document.getElementById('expense-amount').value = expense.amount;
-    document.getElementById('expense-category').value = expense.category;
-    document.getElementById('expense-description').value = expense.description;
+		// Trova la card dell'elemento da modificare
+		const cardElement = document.querySelector(`.card[data-id="${id}"].card-expense`);
+		if (!cardElement) return;
 
-    // Creiamo un pulsante temporaneo per la modifica
-    const updateBtn = document.createElement('button');
-    updateBtn.textContent = 'Aggiorna Spesa';
-    updateBtn.classList.add('update-btn');
-    updateBtn.type = 'button';
+		// Salva il riferimento all'elemento attuale per il ripristino in caso di annullamento
+		const originalExpense = { ...expense };
 
-    // Sostituisci il pulsante di invio con quello di aggiornamento
-    const submitBtn = document.querySelector('#add-expense-form button[type="submit"]');
-    submitBtn.parentNode.insertBefore(updateBtn, submitBtn);
-    submitBtn.style.display = 'none';
+		// Trasforma i campi in input
+		const cardContent = cardElement.querySelector('.card-content');
+		const cardTitle = cardElement.querySelector('.card-title');
 
-    // Aggiungi handler per l'aggiornamento
-    updateBtn.addEventListener('click', async () => {
-      const updatedAmount = document.getElementById('expense-amount').value;
-      const updatedCategory = document.getElementById('expense-category').value;
-      const updatedDescription = document.getElementById('expense-description').value;
+		// Backup del contenuto originale
+		const originalContent = cardContent.innerHTML;
+		const originalTitle = cardTitle.innerHTML;
 
-      await this.updateExpense(id, updatedAmount, updatedCategory, updatedDescription);
+		// Crea il form inline
+		cardContent.innerHTML = `
+			<div class="inline-edit-form">
+				<div class="form-group">
+					<label for="inline-expense-amount-${id}">Importo</label>
+					<input type="number" id="inline-expense-amount-${id}" value="${expense.amount}" step="0.01" required>
+				</div>
+				<div class="form-group">
+					<label for="inline-expense-category-${id}">Categoria</label>
+					<input type="text" id="inline-expense-category-${id}" value="${expense.category}" required>
+				</div>
+				<div class="form-group">
+					<label for="inline-expense-description-${id}">Descrizione</label>
+					<textarea id="inline-expense-description-${id}" required>${expense.description}</textarea>
+				</div>
+				<div class="button-group">
+					<button type="button" class="confirm-btn">Conferma</button>
+					<button type="button" class="cancel-btn">Annulla</button>
+				</div>
+			</div>
+		`;
 
-      // Ripristina il form
-      document.getElementById('add-expense-form').reset();
-      submitBtn.style.display = '';
-      updateBtn.remove();
-    });
+		// Cambio il titolo per indicare che è in modalità modifica
+		cardTitle.innerHTML = `<i class="fas fa-edit"></i> Modifica Spesa`;
 
-    // Porta l'utente alla sezione del form
-    document.getElementById('expenses-section-tab').click();
-  }
+		// Aggiungo classe per lo stile della card in modalità modifica
+		cardElement.classList.add('card-editing');
+
+		// Aggiungi event listener per conferma
+		const confirmBtn = cardContent.querySelector('.confirm-btn');
+		confirmBtn.addEventListener('click', async () => {
+			const updatedAmount = cardContent.querySelector(`#inline-expense-amount-${id}`).value;
+			const updatedCategory = cardContent.querySelector(`#inline-expense-category-${id}`).value;
+			const updatedDescription = cardContent.querySelector(`#inline-expense-description-${id}`).value;
+
+			// Verifica che i campi obbligatori non siano vuoti
+			if (!updatedAmount || !updatedCategory || !updatedDescription) {
+				alert('Tutti i campi sono obbligatori');
+				return;
+			}
+
+			// Aggiorna l'elemento
+			await this.updateExpense(expense.id, updatedAmount, updatedCategory, updatedDescription);
+
+			// Ripristina la card alla visualizzazione normale
+			cardElement.classList.remove('card-editing');
+		});
+
+		// Aggiungi event listener per annullamento
+		const cancelBtn = cardContent.querySelector('.cancel-btn');
+		cancelBtn.addEventListener('click', () => {
+			// Ripristina il contenuto originale
+			cardContent.innerHTML = originalContent;
+			cardTitle.innerHTML = originalTitle;
+			cardElement.classList.remove('card-editing');
+		});
+
+		return true;
+	}
 
   async updateExpense(id, amount, category, description) {
     // Trova l'indice della spesa

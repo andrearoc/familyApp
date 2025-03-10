@@ -7,7 +7,6 @@ export class GoogleCalendarService {
     return new Promise((resolve, reject) => {
       try {
         window.gapi.client.load('calendar', 'v3', () => {
-          console.log('✅ API Calendar caricata');
           resolve();
         });
       } catch (error) {
@@ -52,7 +51,6 @@ export class GoogleCalendarService {
 
       const response = await window.gapi.client.calendar.events.list(params);
 
-      console.log(`✅ Lettura eventi calendario ${calendarId}`);
       if (response && response.result && response.result.items) {
         return response.result.items;
       } else {
@@ -85,7 +83,6 @@ export class GoogleCalendarService {
         'resource': event
       });
 
-      console.log(`✅ Evento creato in ${calendarId}`);
       return response.result;
     } catch (error) {
       console.error(`❌ Errore creazione evento in ${calendarId}:`, error);
@@ -114,7 +111,6 @@ export class GoogleCalendarService {
         'resource': event
       });
 
-      console.log(`✅ Evento ${eventId} aggiornato in ${calendarId}`);
       return response.result;
     } catch (error) {
       console.error(`❌ Errore aggiornamento evento ${eventId}:`, error);
@@ -142,7 +138,6 @@ export class GoogleCalendarService {
         'eventId': eventId
       });
 
-      console.log(`✅ Evento ${eventId} eliminato da ${calendarId}`);
       return true;
     } catch (error) {
       console.error(`❌ Errore eliminazione evento ${eventId}:`, error);
@@ -169,7 +164,6 @@ export class GoogleCalendarService {
     container.innerHTML = '';
     container.appendChild(iframe);
 
-    console.log(`✅ Calendario incorporato in ${containerId}`);
     return true;
   }
 }

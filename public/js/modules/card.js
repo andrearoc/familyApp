@@ -24,12 +24,10 @@ export default class Card {
   render() {
     const card = document.createElement('div');
     // card.classList.add(this.config.cardClass);
-		card.classList.add(`card-${this.config.type.replace(/\s+/g, '-')}`);
+    card.classList.add(`card-${this.config.type.replace(/\s+/g, '-')}`);
+    card.classList.add('card'); // Aggiunto per assicurarsi che tutte le card abbiano la classe 'card'
     card.dataset.id = this.config.id;
     card.dataset.type = this.config.type;
-
-    // Aggiungi una classe specifica per il tipo di card
-    card.classList.add(`card-${this.config.type}`);
 
     // Struttura della card
     let cardHTML = '';

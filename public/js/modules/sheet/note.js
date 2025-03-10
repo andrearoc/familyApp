@@ -104,44 +104,89 @@ class NoteManager {
     }
   }
 
-  editNote(id) {
-    const note = this.notes.find(note => note.id === id);
-    if (!note) return;
+	editNote(id) {
+		const note = this.notes.find(note => note.id === id);
+		if (!note) {
+			return;
+		}
 
-    // Qui puoi implementare la logica per aprire un form di modifica
-    // Per ora, impostiamo solo i valori del form di aggiunta note
-    document.getElementById('note-title').value = note.title;
-    document.getElementById('note-content').value = note.content;
-    document.getElementById('note-category').value = note.category;
+		// Trova la card dell'elemento da modificare - nota che aggiungiamo il check per card-note
+		// per essere più specifici
+		const cardElement = document.querySelector(`.card[data-id="${id}"].card-note`);
+		if (!cardElement) {
+			return;
+		}
 
-    // Creiamo un pulsante temporaneo per la modifica
-    const updateBtn = document.createElement('button');
-    updateBtn.textContent = 'Aggiorna Nota';
-    updateBtn.classList.add('update-btn');
-    updateBtn.type = 'button';
+		// Salva il riferimento all'elemento attuale per il ripristino in caso di annullamento
+		const originalNote = { ...note };
 
-    // Sostituisci il pulsante di invio con quello di aggiornamento
-    const submitBtn = document.querySelector('#add-note-form button[type="submit"]');
-    submitBtn.parentNode.insertBefore(updateBtn, submitBtn);
-    submitBtn.style.display = 'none';
+		// Trasforma i campi in input
+		const cardContent = cardElement.querySelector('.card-content');
+		const cardTitle = cardElement.querySelector('.card-title');
 
-    // Aggiungi handler per l'aggiornamento
-    updateBtn.addEventListener('click', async () => {
-      const updatedTitle = document.getElementById('note-title').value;
-      const updatedContent = document.getElementById('note-content').value;
-      const updatedCategory = document.getElementById('note-category').value;
+		// Backup del contenuto originale
+		const originalContent = cardContent.innerHTML;
+		const originalTitle = cardTitle.innerHTML;
 
-      await this.updateNote(id, updatedTitle, updatedContent, updatedCategory);
+		// Crea il form inline
+		cardContent.innerHTML = `
+			<div class="inline-edit-form">
+				<div class="form-group">
+					<label for="inline-note-title">Titolo</label>
+					<input type="text" id="inline-note-title-${id}" value="${note.title}" required>
+				</div>
+				<div class="form-group">
+					<label for="inline-note-content">Contenuto</label>
+					<textarea id="inline-note-content-${id}" required style="min-height: 100px">${note.content}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="inline-note-category">Categoria</label>
+					<input type="text" id="inline-note-category-${id}" value="${note.category}" required>
+				</div>
+				<div class="button-group">
+					<button type="button" class="confirm-btn">Conferma</button>
+					<button type="button" class="cancel-btn">Annulla</button>
+				</div>
+			</div>
+		`;
 
-      // Ripristina il form
-      document.getElementById('add-note-form').reset();
-      submitBtn.style.display = '';
-      updateBtn.remove();
-    });
+		// Cambio il titolo per indicare che è in modalità modifica
+		cardTitle.innerHTML = `<i class="fas fa-edit"></i> Modifica Nota`;
 
-    // Porta l'utente alla sezione del form
-    document.getElementById('notes-section-tab').click();
-  }
+		// Aggiungo classe per lo stile della card in modalità modifica
+		cardElement.classList.add('card-editing');
+
+		// Aggiungi event listener per conferma
+		const confirmBtn = cardContent.querySelector('.confirm-btn');
+		confirmBtn.addEventListener('click', async () => {
+			const updatedTitle = cardContent.querySelector(`#inline-note-title-${id}`).value;
+			const updatedContent = cardContent.querySelector(`#inline-note-content-${id}`).value;
+			const updatedCategory = cardContent.querySelector(`#inline-note-category-${id}`).value;
+
+			// Verifica che i campi obbligatori non siano vuoti
+			if (!updatedTitle || !updatedContent || !updatedCategory) {
+				alert('Tutti i campi sono obbligatori');
+				return;
+			}
+
+			// Aggiorna l'elemento
+			await this.updateNote(note.id, updatedTitle, updatedContent, updatedCategory);
+
+			// Ripristina la card alla visualizzazione normale
+			cardElement.classList.remove('card-editing');
+		});
+
+		// Aggiungi event listener per annullamento
+		const cancelBtn = cardContent.querySelector('.cancel-btn');
+		cancelBtn.addEventListener('click', () => {
+			// Ripristina il contenuto originale
+			cardContent.innerHTML = originalContent;
+			cardTitle.innerHTML = originalTitle;
+			cardElement.classList.remove('card-editing');
+		});
+
+		return true;
+	}
 
   async updateNote(id, title, content, category) {
     // Trova l'indice della nota

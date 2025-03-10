@@ -3,6 +3,7 @@ import { GOOGLE_CONFIG } from '../../../../admin/js/config.js';
 import { googleCalendarService } from '../../../../admin/js/calendar/google-calendar-service.js';
 import Card from '../card.js';
 import Slider from '../slider.js';
+import MDL from '../modal.js';
 
 class CalendarManager {
   constructor() {
@@ -215,7 +216,6 @@ class CalendarManager {
           this.events.splice(index, 1);
           this.renderEventsAsCards();
         }
-        console.log(`✅ Evento ${id} eliminato con successo`);
       }
     } catch (error) {
       console.error('❌ Errore durante l\'eliminazione dell\'evento:', error);
@@ -255,6 +255,7 @@ class CalendarManager {
 
     // Sostituisci il pulsante di invio con quello di aggiornamento
     const submitBtn = document.querySelector('#add-event-form button[type="submit"]');
+		MDL.open('Modifica Evento', document.getElementById('add-event-form'));
     submitBtn.parentNode.insertBefore(updateBtn, submitBtn);
     submitBtn.style.display = 'none';
 
@@ -389,7 +390,6 @@ class CalendarManager {
       if (result) {
         // Ricarica tutti gli eventi per aggiornare la vista
         await this.loadEvents();
-        console.log(`✅ Evento ${id} aggiornato con successo`);
       }
     } catch (error) {
       console.error('❌ Errore durante l\'aggiornamento dell\'evento:', error);
@@ -421,7 +421,6 @@ class CalendarManager {
         const formattedEvent = this.formatEvent(result);
         this.events.push(formattedEvent);
         this.renderEventsAsCards();
-        console.log('✅ Nuovo evento creato:', result);
         return formattedEvent;
       }
     } catch (error) {

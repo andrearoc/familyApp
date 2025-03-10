@@ -34,17 +34,16 @@
 }
 .card-note .card-header, .card-expense .card-header, .card-wishlist .card-header, .card-event .card-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem;
   border-bottom: var(--border);
 }
 .card-note .card-header .card-title, .card-expense .card-header .card-title, .card-wishlist .card-header .card-title, .card-event .card-header .card-title {
   margin: 0;
-  font-size: 18px;
   font-weight: 600;
   color: var(--text-color);
-  line-height: 1.4;
 }
 .card-note .card-header .card-date, .card-expense .card-header .card-date, .card-wishlist .card-header .card-date, .card-event .card-header .card-date {
   font-size: 12px;
@@ -62,6 +61,7 @@
 }
 .card-note .card-body, .card-expense .card-body, .card-wishlist .card-body, .card-event .card-body {
   padding: 1rem;
+  overflow-y: scroll;
   flex-grow: 1;
   display: flex;
   flex-direction: column;

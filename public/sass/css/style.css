@@ -91,7 +91,7 @@ header h1, header #user {
 
 .container {
   max-width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   background-color: var(--select-bg);
   padding: 1rem;
@@ -328,11 +328,13 @@ footer p {
 .slider-container {
   position: relative;
   width: 100%;
+  height: 50vh;
   overflow: hidden;
   margin: 20px 0;
 }
 .slider-container .slider-wrapper {
   display: flex;
+  height: 80%;
   transition: transform 0.3s ease;
 }
 .slider-container .slider-slide {
@@ -428,17 +430,16 @@ footer p {
 }
 .card-note .card-header, .card-expense .card-header, .card-wishlist .card-header, .card-event .card-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding: 1rem;
   border-bottom: var(--border);
 }
 .card-note .card-header .card-title, .card-expense .card-header .card-title, .card-wishlist .card-header .card-title, .card-event .card-header .card-title {
   margin: 0;
-  font-size: 18px;
   font-weight: 600;
   color: var(--text-color);
-  line-height: 1.4;
 }
 .card-note .card-header .card-date, .card-expense .card-header .card-date, .card-wishlist .card-header .card-date, .card-event .card-header .card-date {
   font-size: 12px;
@@ -456,6 +457,7 @@ footer p {
 }
 .card-note .card-body, .card-expense .card-body, .card-wishlist .card-body, .card-event .card-body {
   padding: 1rem;
+  overflow-y: scroll;
   flex-grow: 1;
   display: flex;
   flex-direction: column;

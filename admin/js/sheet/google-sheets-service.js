@@ -27,7 +27,6 @@ export class GoogleSheetsService {
         range: range
       });
 
-      console.log(`✅ Lettura foglio ${spreadsheetId} - Range ${range}`);
       if (response && response.result && response.result.values) {
         return response.result.values;
       } else {
@@ -45,7 +44,6 @@ export class GoogleSheetsService {
     return new Promise((resolve, reject) => {
       try {
         window.gapi.client.load('sheets', 'v4', () => {
-          console.log('✅ API Sheets caricata');
           resolve();
         });
       } catch (error) {
@@ -106,7 +104,6 @@ export class GoogleSheetsService {
         });
       }
 
-      console.log(`✅ Scrittura foglio ${spreadsheetId} - Range ${range} - Operazione: ${operation}`);
       return response;
     } catch (error) {
       console.error(`❌ Errore scrittura foglio ${spreadsheetId}:`, error);
@@ -147,9 +144,6 @@ export class GoogleSheetsService {
 			// Ottieni l'ID del foglio
 			const sheetId = await this.getSheetId(spreadsheetId, sheetName);
 
-			// Logging aggiuntivo per debug
-			console.log(`Foglio: ${sheetName}, ID ottenuto: ${sheetId}`);
-
 			if (sheetId === null) {
 				console.error(`Foglio ${sheetName} non trovato`);
 				return false;
@@ -171,10 +165,9 @@ export class GoogleSheetsService {
 				}
 			};
 
-			console.log('Esecuzione richiesta di rimozione:', request);
-
 			const response = await window.gapi.client.sheets.spreadsheets.batchUpdate(request);
 			console.log(`✅ Riga ${rowId} rimossa con successo da ${sheetName}`, response);
+
 			return true;
 		} catch (error) {
 			console.error('❌ Errore rimozione riga:', error);
@@ -194,15 +187,6 @@ export class GoogleSheetsService {
 			});
 
 			if (response && response.result && response.result.sheets) {
-				// Log di tutti i nomi dei fogli per debugging
-				console.log('Fogli disponibili:', response.result.sheets.map(s => s.properties.title));
-				console.log('Cercando foglio:', sheetName);
-
-				// Controlla il tipo di dati, poiché potrebbe essere un problema di confronto
-				console.log('Tipo di dati dei nomi dei fogli:',
-					response.result.sheets.map(s => typeof s.properties.title));
-				console.log('Tipo di dati di sheetName:', typeof sheetName);
-
 				// Trasforma in stringa per sicurezza
 				const sheetNameStr = String(sheetName);
 
@@ -210,15 +194,7 @@ export class GoogleSheetsService {
 				const sheet = response.result.sheets.find(s => s.properties.title === sheetNameStr);
 
 				if (sheet) {
-					console.log('Trovato foglio con ID:', sheet.properties.sheetId);
 					return sheet.properties.sheetId;
-				} else {
-					console.log('Nessuna corrispondenza esatta trovata per:', sheetNameStr);
-
-					// Mostra tutti i confronti per debug
-					response.result.sheets.forEach(s => {
-						console.log(`Confronto: "${s.properties.title}" === "${sheetNameStr}" = ${s.properties.title === sheetNameStr}`);
-					});
 				}
 
 				return null;
@@ -228,6 +204,57 @@ export class GoogleSheetsService {
 		} catch (error) {
 			console.error(`❌ Errore nel recupero dell'ID del foglio ${sheetName}:`, error);
 			return null;
+		}
+	}
+
+	async updateRow(spreadsheetId, sheetName, rowId, values) {
+		try {
+			// Assicurati che sia autenticato
+			if (!googleAuthService.isAuthenticated()) {
+				await new Promise((resolve) => {
+					googleAuthService.authenticate(resolve);
+				});
+			}
+
+			// Assicurati che l'API sheets sia caricata
+			if (!window.gapi.client.sheets) {
+				await this.loadSheetsAPI();
+			}
+
+			// Leggi prima i valori attuali del foglio per trovare la riga
+			const allValues = await this.readSheet(spreadsheetId, `${sheetName}!A:Z`);
+
+			if (!allValues || allValues.length === 0) {
+				console.error('Nessun dato trovato');
+				return false;
+			}
+
+			// Trova l'indice della riga da aggiornare
+			const rowIndex = allValues.findIndex(row => row[0] === rowId.toString());
+
+			if (rowIndex === -1) {
+				console.error(`Riga con ID ${rowId} non trovata in ${sheetName}`);
+				return false;
+			}
+
+			// Costruisci il range per l'aggiornamento (ad esempio A5:E5)
+			const range = `${sheetName}!A${rowIndex + 1}:${String.fromCharCode(65 + values.length - 1)}${rowIndex + 1}`;
+
+			// Esegui l'aggiornamento
+			const response = await window.gapi.client.sheets.spreadsheets.values.update({
+				spreadsheetId: spreadsheetId,
+				range: range,
+				valueInputOption: 'RAW',
+				resource: {
+					values: [values]
+				}
+			});
+
+			console.log(`✅ Riga ${rowId} aggiornata con successo in ${sheetName}`, response);
+			return true;
+		} catch (error) {
+			console.error(`❌ Errore aggiornamento riga ${rowId} in ${sheetName}:`, error);
+			throw error;
 		}
 	}
 }

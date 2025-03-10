@@ -27,7 +27,6 @@ export class DataSyncService {
         this.syncWishlist()
       ]);
 
-      console.log('✅ Sincronizzazione completata');
       return true;
     } catch (error) {
       console.error('Errore durante la sincronizzazione:', error);
@@ -47,8 +46,6 @@ export class DataSyncService {
         GOOGLE_CONFIG.SPREADSHEET_ID,
         SHEET_RANGES.NOTES
       );
-
-      console.log('ExistingData Notes:', existingData);
 
       // Converti i dati in oggetti note
       if (existingData && Array.isArray(existingData)) {
@@ -81,7 +78,6 @@ export class DataSyncService {
         );
       }
 
-      console.log('✅ Note sincronizzate');
       return true;
     } catch (error) {
       console.error('❌ Errore sincronizzazione note:', error);
@@ -101,8 +97,6 @@ export class DataSyncService {
         GOOGLE_CONFIG.SPREADSHEET_ID,
         SHEET_RANGES.WISHLIST
       );
-
-      console.log('ExistingData Wishlist:', existingData);
 
       // Converti i dati in oggetti wishlist
       if (existingData && Array.isArray(existingData)) {
@@ -135,7 +129,6 @@ export class DataSyncService {
         );
       }
 
-      console.log('✅ Wishlist sincronizzata');
       return true;
     } catch (error) {
       console.error('❌ Errore sincronizzazione wishlist:', error);
@@ -155,8 +148,6 @@ export class DataSyncService {
         GOOGLE_CONFIG.SPREADSHEET_ID,
         SHEET_RANGES.EXPENSES
       );
-
-      console.log('ExistingData Expenses:', existingData);
 
       // Converti i dati in oggetti spese
       if (existingData && Array.isArray(existingData)) {
@@ -189,7 +180,6 @@ export class DataSyncService {
         );
       }
 
-      console.log('✅ Spese sincronizzate');
       return true;
     } catch (error) {
       console.error('❌ Errore sincronizzazione spese:', error);
@@ -233,7 +223,6 @@ export class DataSyncService {
       if (removed) {
         // Risincronizza dopo la rimozione per assicurare consistenza
         await this.syncDataToSheets();
-        console.log(`✅ Elemento ${itemId} rimosso da ${type}`);
         return true;
       }
 

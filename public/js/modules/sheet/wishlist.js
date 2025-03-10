@@ -104,46 +104,93 @@ class WishlistManager {
     }
   }
 
-  editWishlistItem(id) {
-    const item = this.wishlist.find(item => item.id === id);
-    if (!item) return;
+	editWishlistItem(id) {
+		const item = this.wishlist.find(item => item.id === id);
+		if (!item) return;
 
-    // Qui puoi implementare la logica per aprire un form di modifica
-    // Per ora, impostiamo solo i valori del form di aggiunta wishlist
-    document.getElementById('wishlist-name').value = item.name;
-    document.getElementById('wishlist-price').value = item.estimatedPrice;
-    document.getElementById('wishlist-priority').value = item.priority;
-    document.getElementById('wishlist-notes').value = item.notes;
+		// Trova la card dell'elemento da modificare
+		const cardElement = document.querySelector(`.card[data-id="${id}"].card-wishlist`);
+		if (!cardElement) return;
 
-    // Creiamo un pulsante temporaneo per la modifica
-    const updateBtn = document.createElement('button');
-    updateBtn.textContent = 'Aggiorna Elemento';
-    updateBtn.classList.add('update-btn');
-    updateBtn.type = 'button';
+		// Salva il riferimento all'elemento attuale per il ripristino in caso di annullamento
+		const originalItem = { ...item };
 
-    // Sostituisci il pulsante di invio con quello di aggiornamento
-    const submitBtn = document.querySelector('#add-wishlist-form button[type="submit"]');
-    submitBtn.parentNode.insertBefore(updateBtn, submitBtn);
-    submitBtn.style.display = 'none';
+		// Trasforma i campi in input
+		const cardContent = cardElement.querySelector('.card-content');
+		const cardTitle = cardElement.querySelector('.card-title');
 
-    // Aggiungi handler per l'aggiornamento
-    updateBtn.addEventListener('click', async () => {
-      const updatedName = document.getElementById('wishlist-name').value;
-      const updatedPrice = document.getElementById('wishlist-price').value;
-      const updatedPriority = document.getElementById('wishlist-priority').value;
-      const updatedNotes = document.getElementById('wishlist-notes').value;
+		// Backup del contenuto originale
+		const originalContent = cardContent.innerHTML;
+		const originalTitle = cardTitle.innerHTML;
 
-      await this.updateWishlistItem(id, updatedName, updatedPrice, updatedPriority, updatedNotes);
+		// Crea il form inline con selezione per la priorità
+		cardContent.innerHTML = `
+			<div class="inline-edit-form">
+				<div class="form-group">
+					<label for="inline-wishlist-name-${id}">Nome</label>
+					<input type="text" id="inline-wishlist-name-${id}" value="${item.name}" required>
+				</div>
+				<div class="form-group">
+					<label for="inline-wishlist-price-${id}">Prezzo stimato</label>
+					<input type="number" id="inline-wishlist-price-${id}" value="${item.estimatedPrice}" step="0.01" required>
+				</div>
+				<div class="form-group">
+					<label for="inline-wishlist-priority-${id}">Priorità</label>
+					<select id="inline-wishlist-priority-${id}" required>
+						<option value="BASSA" ${item.priority === 'BASSA' ? 'selected' : ''}>Bassa</option>
+						<option value="MEDIA" ${item.priority === 'MEDIA' ? 'selected' : ''}>Media</option>
+						<option value="ALTA" ${item.priority === 'ALTA' ? 'selected' : ''}>Alta</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="inline-wishlist-notes-${id}">Note</label>
+					<textarea id="inline-wishlist-notes-${id}">${item.notes || ''}</textarea>
+				</div>
+				<div class="button-group">
+					<button type="button" class="confirm-btn">Conferma</button>
+					<button type="button" class="cancel-btn">Annulla</button>
+				</div>
+			</div>
+		`;
 
-      // Ripristina il form
-      document.getElementById('add-wishlist-form').reset();
-      submitBtn.style.display = '';
-      updateBtn.remove();
-    });
+		// Cambio il titolo per indicare che è in modalità modifica
+		cardTitle.innerHTML = `<i class="fas fa-edit"></i> Modifica Elemento`;
 
-    // Porta l'utente alla sezione del form
-    document.getElementById('wishlist-section-tab').click();
-  }
+		// Aggiungo classe per lo stile della card in modalità modifica
+		cardElement.classList.add('card-editing');
+
+		// Aggiungi event listener per conferma
+		const confirmBtn = cardContent.querySelector('.confirm-btn');
+		confirmBtn.addEventListener('click', async () => {
+			const updatedName = cardContent.querySelector(`#inline-wishlist-name-${id}`).value;
+			const updatedPrice = cardContent.querySelector(`#inline-wishlist-price-${id}`).value;
+			const updatedPriority = cardContent.querySelector(`#inline-wishlist-priority-${id}`).value;
+			const updatedNotes = cardContent.querySelector(`#inline-wishlist-notes-${id}`).value;
+
+			// Verifica che i campi obbligatori non siano vuoti
+			if (!updatedName || !updatedPrice) {
+				alert('Nome e prezzo sono campi obbligatori');
+				return;
+			}
+
+			// Aggiorna l'elemento
+			await this.updateWishlistItem(item.id, updatedName, updatedPrice, updatedPriority, updatedNotes);
+
+			// Ripristina la card alla visualizzazione normale
+			cardElement.classList.remove('card-editing');
+		});
+
+		// Aggiungi event listener per annullamento
+		const cancelBtn = cardContent.querySelector('.cancel-btn');
+		cancelBtn.addEventListener('click', () => {
+			// Ripristina il contenuto originale
+			cardContent.innerHTML = originalContent;
+			cardTitle.innerHTML = originalTitle;
+			cardElement.classList.remove('card-editing');
+		});
+
+		return true;
+	}
 
   async updateWishlistItem(id, name, estimatedPrice, priority, notes) {
     // Trova l'indice dell'elemento

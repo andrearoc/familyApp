@@ -21,7 +21,6 @@ export class GoogleAuthService {
       document.head.appendChild(script);
     });
 
-    console.log('✅ Librerie Google caricate');
     return true;
   }
 
@@ -40,7 +39,6 @@ export class GoogleAuthService {
 					});
 				});
 
-				console.log('✅ Client Google inizializzato');
 				this.initialized = true;
 				return true;
 			} catch (error) {
@@ -70,7 +68,6 @@ export class GoogleAuthService {
 				client_id: GOOGLE_CONFIG.CLIENT_ID,
 				scope: GOOGLE_CONFIG.SCOPES,
 				callback: (tokenResponse) => {
-					console.log('✅ Token ottenuto:', tokenResponse);
 					localStorage.setItem(this.tokenStorageKey, JSON.stringify({
 						...tokenResponse,
 						obtained_at: Date.now()
@@ -105,7 +102,6 @@ export class GoogleAuthService {
   // Logout
   logout() {
     localStorage.removeItem(this.tokenStorageKey);
-    console.log('✅ Logout eseguito');
   }
 }
 
