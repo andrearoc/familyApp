@@ -22,10 +22,10 @@ session_start();
 
     <div class="tab-container">
       <div class="tab-links">
-        <button class="tab-link active" onclick="openTab(event, 'notes-tab')">Note</button>
-        <button class="tab-link" onclick="openTab(event, 'expenses-tab')">Spese</button>
-        <button class="tab-link" onclick="openTab(event, 'wishlist-tab')">Wishlist</button>
-				<button class="tab-link" onclick="openTab(event, 'calendar-tab')">Calendario</button>
+        <button class="tab-link active" data-tab-target="notes-tab">Note</button>
+        <button class="tab-link" data-tab-target="expenses-tab">Spese</button>
+        <button class="tab-link" data-tab-target="wishlist-tab">Wishlist</button>
+        <button class="tab-link" data-tab-target="calendar-tab">Calendario</button>
       </div>
 
       <!-- Tab Note -->
@@ -37,34 +37,13 @@ session_start();
       <!-- Tab Wishlist -->
       <?php include 'tabs/wishlist.php'; ?>
 
-			<!-- Tab Calendario -->
-			<?php include 'tabs/calendar.php'; ?>
+      <!-- Tab Calendario -->
+      <?php include 'tabs/calendar.php'; ?>
     </div>
   </div>
 
   <?php include 'includes/modals.php'; ?>
   <?php include 'includes/footer.php'; ?>
-
-  <script>
-    // Funzione per cambiare tab
-    function openTab(evt, tabName) {
-      // Nascondi tutti i contenuti dei tab
-      const tabContents = document.getElementsByClassName("tab-content");
-      for (let i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove("active");
-      }
-
-      // Rimuovi la classe "active" da tutti i tab link
-      const tabLinks = document.getElementsByClassName("tab-link");
-      for (let i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].classList.remove("active");
-      }
-
-      // Mostra il tab corrente e aggiungi la classe "active" al pulsante
-      document.getElementById(tabName).classList.add("active");
-      evt.currentTarget.classList.add("active");
-    }
-  </script>
 
   <!-- Importa i file JavaScript -->
   <script type="module" src="./public/js/main.js"></script>
