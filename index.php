@@ -26,6 +26,7 @@ session_start();
         <button class="tab-link" data-tab-target="expenses-tab">Spese</button>
         <button class="tab-link" data-tab-target="wishlist-tab">Wishlist</button>
         <button class="tab-link" data-tab-target="calendar-tab">Calendario</button>
+				<button class="tab-link" data-tab-target="tools-tab">Strumenti</button>
       </div>
 
       <!-- Tab Note -->
@@ -39,6 +40,9 @@ session_start();
 
       <!-- Tab Calendario -->
       <?php include 'tabs/calendar.php'; ?>
+
+			<!-- Tab Tools -->
+      <?php include 'tabs/tool.php'; ?>
     </div>
   </div>
 

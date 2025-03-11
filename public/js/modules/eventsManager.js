@@ -6,21 +6,40 @@ import { dataSyncService } from '../../../admin/js/sheet/data-sync-service.js';
 import { expenseManager } from './sheet/expenseEstimator.js';
 import { calendarManager } from './calendar/calendar.js';
 import MDL from './modal.js';
+import TOOL from './tools/tool.js';
 
 const EVENTS = {
-  init: () => {
-    // Gestione autenticazione
-    EVENTS.setupAuthListeners();
+	init: () => {
+		// Gestione autenticazione
+		EVENTS.setupAuthListeners();
 
-    // Gestione modali e bottoni
-    EVENTS.setupModalButtons();
+		// Gestione modali e bottoni
+		EVENTS.setupModalButtons();
 
-    // Gestione form
-    EVENTS.setupFormListeners();
+		// Aggiungi il setup del pulsante dell'app
+		EVENTS.setupAppButton();
 
-    // Gestione sincronizzazione
-    EVENTS.setupSyncButton();
-  },
+		// Gestione form
+		EVENTS.setupFormListeners();
+
+		// Gestione sincronizzazione
+		EVENTS.setupSyncButton();
+	},
+
+	setupAppButton: () => {
+		const openAppButton = document.getElementById('openApp');
+		if (openAppButton) {
+			openAppButton.addEventListener('click', () => {
+				const toolsContent = document.createElement('div');
+				toolsContent.id = 'tools-modal-content';
+				toolsContent.className = 'tools-container';
+
+				TOOL.init(toolsContent);
+
+				MDL.open('Strumenti dell\'applicazione', toolsContent);
+			});
+		}
+	},
 
   setupAuthListeners: () => {
     document.getElementById('google-auth-btn').addEventListener('click', () => {

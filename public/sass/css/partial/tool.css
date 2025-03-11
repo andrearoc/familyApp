@@ -1,0 +1,148 @@
+:root {
+  --primary-color: #2A5D43;
+  --secondary-color: #E8F6F0;
+  --third-color: #449f70;
+  --text-color: #3C4A3E;
+  --accent-color: #4cd68f;
+  --border-color: #2f905e;
+  --select-bg: #ffffff;
+  --background-color: #f5f5f5;
+  --secondary-background-color: #f5f5f5;
+  --red-color: #ff0000;
+  --red-dark-color: #cc0000;
+  --icon-size: 1.2rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --shadow-dropdown: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border: 1px solid var(--border-color);
+}
+
+#tools-container {
+  display: flex;
+  /* Stile per il modal */
+  /* Stili specifici per i tool */
+}
+#tools-container .app-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+#tools-container .app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+#tools-container .icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-dropdown);
+}
+#tools-container .icon-circle i {
+  color: white;
+  font-size: 24px;
+}
+#tools-container .icon-name {
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-color);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tools-container #modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#tools-container #modal-backdrop.show {
+  opacity: 1;
+}
+#tools-container .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background-color: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#tools-container .modal.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+#tools-container .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+#tools-container .modal-content {
+  padding: 20px;
+}
+#tools-container .close-button {
+  cursor: pointer;
+  font-size: 20px;
+  color: #666;
+}
+#tools-container .close-button:hover {
+  color: #000;
+}
+#tools-container .input-group {
+  margin-bottom: 15px;
+}
+#tools-container .result-container {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+#tools-container button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#tools-container button:hover {
+  background-color: #2980b9;
+}
+#tools-container input, #tools-container select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+#tools-container .password-display {
+  font-family: monospace;
+  font-size: 16px;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+
+/*# sourceMappingURL=tool.css.map */

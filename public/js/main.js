@@ -10,6 +10,7 @@ import TEMA from './modules/theme.js';
 import MDL from './modules/modal.js';
 import TAB from './modules/tabManager.js';
 import EVENTS from './modules/eventsManager.js';
+import TOOL from './modules/tools/tool.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inizializza i moduli dell'interfaccia utente
@@ -33,5 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Carica gli eventi del calendario
     calendarManager.init(document.getElementById('calendar-events-container'));
+
+    // Inizializza il modulo degli strumenti
+    TOOL.init(document.getElementById('tools-container'));
+  } else {
+    // Se l'utente non è autenticato, possiamo comunque inizializzare TOOL
+    // se vogliamo renderlo disponibile anche a utenti non autenticati
+    const toolsContainer = document.getElementById('tools-container');
+    if (toolsContainer) {
+      TOOL.init(toolsContainer);
+    }
   }
+
+  // Event listener per la pulizia delle risorse prima di chiudere la pagina
+  window.addEventListener('beforeunload', () => {
+    TOOL.cleanup();
+  });
 });
